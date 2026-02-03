@@ -69,7 +69,7 @@
 
 
 5. Inspeccionar el tipo de mensajes en los topics principales
-6. 
+   
   /clock >> rosgraph_msgs/msg/Clock
 
   /cmd_vel >> geometry_msgs/msg/Twist
