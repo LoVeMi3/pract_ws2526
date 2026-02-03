@@ -18,7 +18,7 @@
 
 
 
-3. Identificar topics relevantes (sensores, odometría, comandos)
+2. Identificar topics relevantes (sensores, odometría, comandos)
    
   /clock
   
@@ -68,7 +68,7 @@
   
 
 
-5. Inspeccionar el tipo de mensajes en los topics principales
+3. Inspeccionar el tipo de mensajes en los topics principales
    
   /clock >> rosgraph_msgs/msg/Clock
 
@@ -98,7 +98,7 @@
   
 
 
-8. Observar mensajes en tiempo real en al menos dos topics (uno sensorial y otro de estado)
+4. Observar mensajes en tiempo real en al menos dos topics (uno sensorial y otro de estado)
    
   /scan_raw >> 
   
