@@ -1,8 +1,8 @@
 
 #include "rclcpp/rclcpp.hpp"
 
-#include "ch2_examples/PublisherNode.hpp"
-#include "ch2_examples/SubscriberNode.hpp"
+#include "practica2/PublisherNode.hpp"
+#include "practica2/SubscriberNode.hpp"
 
 int main(int argc, char * argv[])
 {

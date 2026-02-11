@@ -1,5 +1,5 @@
 #include "rclcpp/rclcpp.hpp"
-#include "ch2_examples/SubscriberNode.hpp"
+#include "practica2/SubscriberNode.hpp"
 
 int main(int argc, char * argv[])
 {

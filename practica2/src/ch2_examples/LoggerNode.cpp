@@ -1,5 +1,5 @@
 #include "rclcpp/rclcpp.hpp"
-#include "ch2_examples/LoggerNode.hpp"
+#include "practica2/LoggerNode.hpp"
 
 using namespace std::chrono_literals;
 

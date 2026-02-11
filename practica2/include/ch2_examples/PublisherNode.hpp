@@ -1,5 +1,5 @@
-#ifndef CH2_EXAMPLES__PUBLISHER_NODE_HPP_
-#define CH2_EXAMPLES__PUBLISHER_NODE_HPP_
+#ifndef PRACTICA2__PUBLISHER_NODE_HPP_
+#define PRACTICA2__PUBLISHER_NODE_HPP_
 
 #include "geometry_msgs/msg/Twist.hpp"
 
