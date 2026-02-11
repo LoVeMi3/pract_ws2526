@@ -16,4 +16,4 @@ private:
   rclcpp::Subscription<kobuki_ros_interfaces/msg/BumperEvent>::SharedPtr counter_subscription_;
 };
 
-#endif // CH2_EXAMPLES__SUBSCRIBER_NODE_HPP_
+#endif // PRACTICA2__SUBSCRIBER_NODE_HPP_

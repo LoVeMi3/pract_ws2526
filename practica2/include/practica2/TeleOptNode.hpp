@@ -1,6 +1,6 @@
 #include "rclcpp/rclcpp.hpp"
 
-class LoggerNode : publis rclcpp::Node
+class TeleOptNode : publis rclcpp::Node
 {
 public:
 	LoggerNode();

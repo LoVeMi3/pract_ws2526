@@ -18,4 +18,4 @@ private:
   geometry_msgs::msg::Twist counter_message_;
 };
 
-#endif // CH2_EXAMPLES__PUBLISHER_NODE_HPP_
+#endif // PRACTICA2__PUBLISHER_NODE_HPP_

@@ -8,7 +8,7 @@ find_package(geometry_msgs/msg/Twist REQUIRED)
 find_package(std_msgs/msg/Int32 REQUIRED)
 
 add_library(${PROJECT_NAME}
-  src/practica2/LoggerNode.cpp
+  src/practica2/TeleOptNode.cpp
   src/practica2/PublicherNode.cpp
   src/practica2/SubscriberNode.cpp
 )
@@ -24,8 +24,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   ${geometry_msgs_TARGETS}
 )
 
-add_executable(logger src/logger_main.cpp)
-target_link_libraries(logger ${PROJECT_NAME})
+add_executable(teleopt src/teleopt_main.cpp)
+target_link_libraries(teleopt ${PROJECT_NAME})
 
 add_executable(publisher src/publisher_main.cpp)
 target_link_libraries(publisher ${PROJECT_NAME})
@@ -38,7 +38,7 @@ target_link_libraries(pub_sub ${PROJECT_NAME})
 
 install(TARGETS
   ${PROJECT_NAME}
-  logger
+  teleopt
   publisher
   subscriber
   pub_sub

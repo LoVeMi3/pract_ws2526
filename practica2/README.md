@@ -7,7 +7,7 @@ El timer es el que toma las decisiones de control, el que publica los mensajes
 de velocidad, el que hace los cálculos.
 Necesitamos un proceso intermedio que defina lo de los estados, en qué estado 
 estamos, el switch.
-El callback toma las deciosiones de percepción , en qué estado estamos, en el de 
+El callback toma las decisiones de percepción , en qué estado estamos, en el de 
 parar, girar, ir hacia delante, etc.
 
 
