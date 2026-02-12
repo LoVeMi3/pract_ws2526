@@ -9,8 +9,7 @@ find_package(std_msgs/msg/Int32 REQUIRED)
 
 add_library(${PROJECT_NAME}
   src/practica2/TeleOptNode.cpp
-  src/practica2/PublicherNode.cpp
-  src/practica2/SubscriberNode.cpp
+  src/teleopt_main.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -39,9 +38,6 @@ target_link_libraries(pub_sub ${PROJECT_NAME})
 install(TARGETS
   ${PROJECT_NAME}
   teleopt
-  publisher
-  subscriber
-  pub_sub
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
