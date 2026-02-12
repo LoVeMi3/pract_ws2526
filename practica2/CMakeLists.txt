@@ -26,15 +26,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 add_executable(teleopt src/teleopt_main.cpp)
 target_link_libraries(teleopt ${PROJECT_NAME})
 
-add_executable(publisher src/publisher_main.cpp)
-target_link_libraries(publisher ${PROJECT_NAME})
-
-add_executable(subscriber src/subscriber_main.cpp)
-target_link_libraries(subscriber ${PROJECT_NAME})
-
-add_executable(pub_sub src/pub_sub_main.cpp)
-target_link_libraries(pub_sub ${PROJECT_NAME})
-
 install(TARGETS
   ${PROJECT_NAME}
   teleopt
