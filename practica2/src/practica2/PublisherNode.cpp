@@ -8,7 +8,7 @@ namespace include {
 PublisherNode::PublisherNode()
 : Node("publisher_node")
 {
-	publisher = create_publisher<geometry_msgs/msg/Twist>("counter", 10)
+	publisher = create_publisher<geometry_msgs/msg/Twist>("counter", 10);
 }
 //mirar mensajes de nodos y topics, comprobar qué tipos de datos se publican
 //los estados

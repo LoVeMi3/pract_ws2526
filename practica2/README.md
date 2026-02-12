@@ -1,3 +1,9 @@
+En ROS 2, para un teleoperador reactivo, lo ideal es que un mismo nodo escuche (subscriba) y hable (publique).
+1. El concepto: Percepción vs. Control
+El Callback del Bumper (Percepción): No toma decisiones de movimiento. Solo dice: "Oye, me acaban de avisar que el bumper izquierdo se ha pulsado". Guarda ese estado en una variable.
+
+El Timer (Control): Se ejecuta cada 100ms (10 Hz). Mira las variables de estado y dice: "A ver, ¿está el izquierdo pulsado? Sí. Pues publico giro".
+
 El mensaje que se recibe del subscriptor, el tipo de mensaje, hay que traducirlo 
 a estados del robot, crear un enum de los estados y utilizar un switch para ir 
 cambiando de estado, llamar al calback correspondiente y que haga lo que tenga 
