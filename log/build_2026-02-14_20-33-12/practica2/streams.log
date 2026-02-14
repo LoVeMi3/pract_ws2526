@@ -1,0 +1,32 @@
+[0.011s] Invoking command in '/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica2': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica2 -DCMAKE_INSTALL_PREFIX=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica2
+[0.094s] -- The C compiler identification is GNU 13.3.0
+[0.158s] -- The CXX compiler identification is GNU 13.3.0
+[0.172s] -- Detecting C compiler ABI info
+[0.240s] -- Detecting C compiler ABI info - done
+[0.246s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.247s] -- Detecting C compile features
+[0.247s] -- Detecting C compile features - done
+[0.255s] -- Detecting CXX compiler ABI info
+[0.326s] -- Detecting CXX compiler ABI info - done
+[0.332s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.332s] -- Detecting CXX compile features
+[0.333s] -- Detecting CXX compile features - done
+[0.346s] -- Configuring incomplete, errors occurred!
+[0.346s] [31mCMake Error at CMakeLists.txt:4 (find_package):
+[0.346s]   By not providing "Findament_cake.cmake" in CMAKE_MODULE_PATH this project
+[0.346s]   has asked CMake to find a package configuration file provided by
+[0.346s]   "ament_cake", but CMake did not find one.
+[0.346s] 
+[0.346s]   Could not find a package configuration file provided by "ament_cake" with
+[0.346s]   any of the following names:
+[0.346s] 
+[0.346s]     ament_cakeConfig.cmake
+[0.346s]     ament_cake-config.cmake
+[0.346s] 
+[0.346s]   Add the installation prefix of "ament_cake" to CMAKE_PREFIX_PATH or set
+[0.346s]   "ament_cake_DIR" to a directory containing one of the above files.  If
+[0.346s]   "ament_cake" provides a separate development package or SDK, be sure it has
+[0.347s]   been installed.
+[0.347s] 
+[0.347s] [0m
+[0.348s] Invoked command in '/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica2' returned '1': DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica2 -DCMAKE_INSTALL_PREFIX=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica2
