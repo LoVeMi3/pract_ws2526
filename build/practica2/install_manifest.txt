@@ -1,0 +1,4 @@
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica2/lib/libpractica2.a
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica2/lib/practica2/teleopt
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica2/share/practica2/cmake/export_practica2Export.cmake
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica2/share/practica2/cmake/export_practica2Export-noconfig.cmake

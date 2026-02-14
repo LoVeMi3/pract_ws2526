@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-59d481344c63f1132155.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "practica2",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "practica2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-practica2-74396b80541b5d861255.json",
+					"name" : "practica2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "practica2_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-practica2_uninstall-58b49f7c334b32d67da3.json",
+					"name" : "practica2_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "teleopt::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-teleopt-5afe0822bc5a516a0d44.json",
+					"name" : "teleopt",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-a8b118b362934380e4bf.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica2",
+		"source" : "/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica2"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
