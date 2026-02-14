@@ -73,3 +73,9 @@ lovemi@f-l3202-pc30:~$
 // See the License for the specific language governing permissions and
 // limitations under the License.
 =======================
+
+target_link_libraries(${PROJECT_NAME} PUBLIC
+  rclcpp::rclcpp
+  ${std_msgs_TARGETS}
+  ${geometry_msgs_TARGETS}
+)

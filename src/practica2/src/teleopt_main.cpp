@@ -1,5 +1,5 @@
 #include "rclcpp/rclcpp.hpp"
-#include "practica2/TeleOptNodeNode.hpp"
+#include "practica2/TeleOptNode.hpp"
 
 int main(int argc, char *argv[])
 {

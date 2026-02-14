@@ -1,26 +1,26 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.8)
 project(practica2)
 
-find_package(ament_cake REQUIRED)
+find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(geometry_msgs/msg/Twist REQUIRED)
-find_package(std_msgs/msg/Int32 REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(kobuki_ros_interfaces REQUIRED)
 
 add_library(${PROJECT_NAME}
   src/practica2/TeleOptNode.cpp
-  src/teleopt_main.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRECT_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
 )
 
-target_link_libraries(${PROJECT_NAME} PUBLIC
-  rclcpp::rclcpp
-  ${std_msgs_TARGETS}
-  ${geometry_msgs_TARGETS}
+ament_target_dependencies(${PROJECT_NAME}
+  rclcpp
+  std_msgs
+  geometry_msgs
+  kobuki_ros_interfaces
 )
 
 add_executable(teleopt src/teleopt_main.cpp)
@@ -49,6 +49,7 @@ ament_export_dependencies(
   rclcpp
   std_msgs
   geometry_msgs
+  kobuki_ros_interfaces
 )
 
 ament_package()

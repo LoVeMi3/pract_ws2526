@@ -2,10 +2,10 @@
 #define PRACTICA2__TELEOPT_NODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
-#include "kobuki_ros_interfaces/msg/BumperEvent.hpp"
-#include "geometry_msgs/msg/Twist.hpp"
+#include "kobuki_ros_interfaces/msg/bumper_event.hpp"
+#include "geometry_msgs/msg/twist.hpp"
 
-class TeleOptNode : publis rclcpp::Node
+class TeleOptNode : public rclcpp::Node
 {
 public:
   TeleOptNode();
@@ -14,8 +14,8 @@ private:
   void bumper_callback(const kobuki_ros_interfaces::msg::BumperEvent::SharedPtr msg);
   void pub_speed();
 
-  rclcpp::Subscription<kobuki_ros_interfaces/msg/BumperEvent>::SharedPtr subscription_;
-  rclcpp::Publisher<geometry_msgs/msg/Twist>::SharedPtr publisher_;
+  rclcpp::Subscription<kobuki_ros_interfaces::msg::BumperEvent>::SharedPtr bumper_sub_;
+  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_;
   rclcpp::TimerBase::SharedPtr timer_;
 
   //estados bumper
