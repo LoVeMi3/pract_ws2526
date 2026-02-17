@@ -1,9 +1,11 @@
 En ROS 2, para un teleoperador reactivo, lo ideal es que un mismo nodo escuche (subscriba) y hable (publique).
-El concepto: Percepción vs. Control
-El Callback del Bumper (Percepción): No toma decisiones de movimiento. Solo dice: "Oye, me acaban de avisar que el bumper izquierdo se ha pulsado". Guarda ese estado en una variable. El callback toma las decisiones de percepción , en qué estado estamos, en el de 
-parar, girar, ir hacia delante, etc
 
-El Timer (Control): Se ejecuta cada 100ms (10 Hz). Mira las variables de estado y dice: "A ver, ¿está el izquierdo pulsado? Sí. Pues publico giro". El timer es el que toma las decisiones de control, el que publica los mensajes 
+El concepto: percepción vs. control
+
+El callback del bumper (percepción): No toma decisiones de movimiento. Sólo dice: "Oye, me acaban de avisar que el bumper izquierdo se ha pulsado". Guarda ese estado en una variable. El callback toma las decisiones de percepción , en qué 
+estado estamos, en el de parar, girar, ir hacia delante, etc
+
+El timer (control): se ejecuta cada 100ms (10 Hz). Mira las variables de estado y dice: "A ver, ¿está el izquierdo pulsado? Sí. Pues publico giro". El timer es el que toma las decisiones de control, el que publica los mensajes 
 de velocidad, el que hace los cálculos.
 
 Necesitamos un proceso intermedio que defina lo de los estados, en qué estado 
@@ -58,7 +60,7 @@ Vector3  angular
 lovemi@f-l3202-pc30:~$ 
 
 
-=======================
+
 // Copyright 2026 Intelligent Robotics Lab
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -72,7 +74,7 @@ lovemi@f-l3202-pc30:~$
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
-=======================
+
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
   rclcpp::rclcpp
