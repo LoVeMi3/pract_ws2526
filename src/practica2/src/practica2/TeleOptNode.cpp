@@ -34,10 +34,6 @@ TeleOptNode::pub_speed()
   	msg.linear = linear_vel_;
   	msg.angular = 0.0;
   	RCLCPP_INFO(get_logger(), "A toda vela hacia delante");
-  if (left_pressed_ && right_pressed_) {
-    msg.linear.x = 0.0;
-    msg.angular.z = 0.0;
-    RCLCPP_INFO(get_logger(), "No todos a la vez, por favor");
   } else if (left_pressed_) {
     msg.linear.x = 0.0;
     msg.angular.z = angular_vel_;
@@ -46,6 +42,10 @@ TeleOptNode::pub_speed()
     msg.linear.x = 0.0;
     msg.angular.z = -angular_vel_;
     RCLCPP_INFO(get_logger(), "A estribooooooooor");
+  } else if (left_pressed_ && right_pressed_) {
+    msg.linear.x = 0.0;
+    msg.angular.z = 0.0;
+    RCLCPP_INFO(get_logger(), "No todos a la vez, por favor");
   } else {
     msg.linear.x = 0.0;
     msg.angular.z = 0.0;
