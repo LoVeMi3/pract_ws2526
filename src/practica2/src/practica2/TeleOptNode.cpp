@@ -31,8 +31,8 @@ TeleOptNode::pub_speed()
   auto msg = geometry_msgs::msg::Twist();
 
   if (mid_pressed_) {
-  	msg.linear = linear_vel_;
-  	msg.angular = 0.0;
+  	msg.linear.x = linear_vel_;
+  	msg.angular.z = 0.0;
   	RCLCPP_INFO(get_logger(), "A toda vela hacia delante");
   } else if (left_pressed_) {
     msg.linear.x = 0.0;
