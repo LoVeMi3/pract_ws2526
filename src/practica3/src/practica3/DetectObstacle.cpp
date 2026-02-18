@@ -24,6 +24,8 @@ calcular posición 2D, publicar el resultado y publicar la tf asociada al obstá
 #include "tf2/transform_datatypes.h"
 #include "tf2_ros/transform_broadcaster.h"
 
+#include "geometry_msgs/msg/transform_stamped.hpp"
+
 using namespace std::chrono_literals;
 
 DetectObstacle::DetectObstacle()
@@ -35,34 +37,7 @@ DetectObstacle::DetectObstacle()
   laser_sub_ = create_subscription<sensor_msgs::msg::LaserScan>("input_scan", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectObstacle::laser_callback, this, _1));
   obstacle_pub_ = create_publisher<geometry_msgs::msg::PointStamped>("/nearest_obstacle", 100);
 
-  timer_generate_ = create_wall_timer(20s, std::bind(&TFPublisherNode::generate_tf, this));
-  timer_publish_ = create_wall_timer(50ms, std::bind(&TFPublisherNode::publish_tf, this));
-
   tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(*this);
-
-  generate_tf();
-}
-
-bool
-DetectObstacle::is_obstacle(const sensor_msgs::msg::LaserScan & scan, float dist_thrld)
-{
-  float distance_min = std::numeric_limits<float>::infinity();
-  for (size_t i = 0; i < scan.ranges.size(); ++i) {
-    const float range = scan.ranges[i];
-    if (!std::isfinite(range)) {
-      continue;
-    }
-    if (range < scan.range_min || range > scan.range_max) {
-      continue;
-    }
-    distance_min = std::min(distance_min, range);
-  }
-
-  if (!std::isfinite(distance_min)) {
-    return false;
-  }
-
-  return distance_min < dist_thrld;
 }
 
 void
@@ -71,31 +46,71 @@ DetectObstacle::laser_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr
   std_msgs::msg::Bool obstacle_msg;
   obstacle_msg.data = is_obstacle(*scan, min_distance_);
 
+  float min_range = std::numeric_limits<float>::infinity();
+  int min_index = -1;
+
   if (obstacle_msg.data) {
     print_obstacle_info(*scan, min_distance_);
   }
 
-  obstacle_pub_->publish(obstacle_msg);
-}
+  for (size_t i = 0; i < scan->ranges.size(); ++i) {
+    float r = scan->ranges[i];
 
-void
-DetectObstacle::generate_tf()
-{
-  std::uniform_real_distribution<double> pos_x(-5.0, 5.0);
-  std::uniform_real_distribution<double> pos_y(-5.0, 5.0);
+    if (!std::isfinite(r)) {
+      continue;
+    }
+    if (r < scan->range_min || r > scan->range_max) {
+      continue;
+    }
+    if (r < min_range) {
+      min_range = r;
+      min_index = i;
+    }
+  }
 
-  transform_.header.stamp = now();
-  transform_.header.frame_id = "odom";
-  transform_.child_frame_id = "target";
+  if (min_index == -1) {
+    return;
+  }
+  
+  float angle = scan->angle_min + min_index * scan->angle_increment;
+  float x_laser = min_range * std::cos(angle);
+  float y_laser = min_range * std::sin(angle);
 
-  transform_.transform.translation.x = pos_x(generator_);
-  transform_.transform.translation.y = pos_y(generator_);
-  transform_.transform.translation.z = 0.0;
-}
+  //publicar el pointStamped
+  geometry_msgs::msg::PointStamped point_laser;
+  point_laser.header.stamp = scan->header.stamp;
+  point_laser.header.frame_id = scan->header.frame_id;
 
-void
-DetectObstacle::publish_tf()
-{
-  transform_.header.stamp = now();
-  tf_broadcaster_->sendTransform(transform_);
+  point_laser.point.x = x_laser;
+  point_laser.point.y = y_laser;
+  point_laser.point.z = 0.0;
+
+  geometry_msgs::msg::PointStamped point_robot;
+  try {
+    geometry_msgs::msg::TransformStamped transform = tf_buffer_.lookupTransform("base_link", scan->header.frame_id, scan->header.stamp, rclcpp::Duration::from_seconds(0.1));
+    tf2::doTransform(point_laser, point_robot, transform);
+  } catch (tf2::TransformException & ex) {
+    RCLCPP_WARN(this->get_logger(), "TF error: %s", ex.what());
+    return;
+  }
+  
+  obstacle_pub_->publish(point_robot);
+
+  //publicar tf
+  geometry_msgs::msg:.TransformStamped tf_msg;
+
+  tf_msg.header.stamp = scan->header.stamp;
+  tf_msg.header.frame_id = "base_link";
+  tf_msg.child_frame_id = "nearest_obstacle";
+
+  tf_msg.transform.translation.x = point_robot.point.x;
+  tf_msg.transform.translation.y = point_robot.point.y;
+  tf_msg.transform.translation.z = 0.0;
+
+  tf_msg.transform.rotation.x = 0.0;
+  tf_msg.transform.rotation.y = 0.0;
+  tf_msg.transform.rotation.z = 0.0;
+  tf_msg.transform.rotation.w = 1.0;
+
+  tf_broadcaster_->sendTransform(tf_msg);
 }
