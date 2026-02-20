@@ -26,6 +26,8 @@ calcular posición 2D, publicar el resultado y publicar la tf asociada al obstá
 
 #include "geometry_msgs/msg/transform_stamped.hpp"
 
+// executable='detect_obstacle' VERYIMPORTANT
+
 using namespace std::chrono_literals;
 
 DetectObstacle::DetectObstacle()
