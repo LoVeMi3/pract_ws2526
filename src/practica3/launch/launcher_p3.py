@@ -14,7 +14,7 @@ def generate_launch_description():
     param_file_cam = os.path.join(pkg_dir_cam, 'config', 'params.yaml')
 
     detect_img_cmd = Node(package='camera',
-                        executable='hsv_filter',
+                        executable='hsv_filter_node',
                         output='screen',
                         parameters=[param_file_cam],
                         remappings=[
@@ -24,7 +24,7 @@ def generate_launch_description():
                         ])
 
     convert_2d_3d = Node(package='camera',
-                        executable='detection_2d_to_3d_depth',
+                        executable='detection_to_3d_from_depth_node',
                         output='screen',
                         parameters=[param_file_cam],
                         remappings=[
