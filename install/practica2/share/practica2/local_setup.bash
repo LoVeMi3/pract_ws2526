@@ -1,1 +1,0 @@
-/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica2/ament_cmake_environment_hooks/local_setup.bash

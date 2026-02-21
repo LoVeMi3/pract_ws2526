@@ -1,2 +1,0 @@
-/usr/bin/ar qc libpractica2.a CMakeFiles/practica2.dir/src/practica2/TeleOptNode.cpp.o
-/usr/bin/ranlib libpractica2.a
