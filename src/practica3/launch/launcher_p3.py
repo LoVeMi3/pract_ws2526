@@ -9,10 +9,11 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
     pkg_dir_cam = get_package_share_directory('camera')
-    pkg_dir_laser = det_get_package_share_directory('practica3')
+    pkg_dir_laser = get_package_share_directory('practica3')
 
     param_file_cam = os.path.join(pkg_dir_cam, 'config', 'params.yaml')
 
+    #paso2
     detect_img_cmd = Node(package='camera',
                         executable='hsv_filter_node',
                         output='screen',
@@ -23,6 +24,7 @@ def generate_launch_description():
                           ('output_detection_2d', 'detection_2d'),
                         ])
 
+    #paso3
     convert_2d_3d = Node(package='camera',
                         executable='detection_to_3d_from_depth_node',
                         output='screen',
@@ -34,10 +36,10 @@ def generate_launch_description():
                           ('output_detection_3d', 'detection_3d'),
                         ])
 
+    #paso1
     detect_laser_cmd = Node(package='practica3',
                             executable='detect_obstacle',
                             output='screen',
-                            parameters=[param_file],
                             remappings=[
                               ('input_scan', '/scan_raw')
                             ])
