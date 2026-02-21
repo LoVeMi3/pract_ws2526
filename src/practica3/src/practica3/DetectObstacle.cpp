@@ -9,8 +9,6 @@ calcular posición 2D, publicar el resultado y publicar la tf asociada al obstá
 
 #include "practica3/DetectObstacle.hpp"
 
-#include "geometry_msgs/msg/point_stamped.hpp"
-
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_msgs/msg/bool.hpp"
 
@@ -25,36 +23,35 @@ calcular posición 2D, publicar el resultado y publicar la tf asociada al obstá
 #include "tf2_ros/transform_broadcaster.h"
 #include "tf2_ros/transform_listener.h"
 
+#include "geometry_msgs/msg/point_stamped.hpp"
 #include "geometry_msgs/msg/transform_stamped.hpp"
 
 // executable='detect_obstacle' VERYIMPORTANT
 
 using namespace std::chrono_literals;
 
+namespace practica3 {
+
 DetectObstacle::DetectObstacle()
-: Node("detect_obstacle"), tf_buffer_(this->get_clock()), tf_listener_(tf_buffer_), rd_(), generator_(rd_())
+: Node("detect_obstacle"), tf_buffer_(this->get_clock())
 {
   declare_parameter("min_distance", min_distance_);
   get_parameter("min_distance", min_distance_);
 
-  laser_sub_ = create_subscription<sensor_msgs::msg::LaserScan>("input_scan", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectObstacle::laser_callback, this, _1));
+  laser_sub_ = create_subscription<sensor_msgs::msg::LaserScan>("input_scan", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectObstacle::laser_callback, this, std::placeholders::_1));
   obstacle_pub_ = create_publisher<geometry_msgs::msg::PointStamped>("/nearest_obstacle", 10);
 
   tf_listener_ = std::make_shared<tf2_ros::TransformListener>(tf_buffer_);
+  tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
 }
 
 void
 DetectObstacle::laser_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr & scan)
 {
   std_msgs::msg::Bool obstacle_msg;
-  obstacle_msg.data = is_obstacle(*scan, min_distance_);
 
   float min_range = std::numeric_limits<float>::infinity();
   int min_index = -1;
-
-  if (obstacle_msg.data) {
-    print_obstacle_info(*scan, min_distance_);
-  }
 
   for (size_t i = 0; i < scan->ranges.size(); ++i) {
     float r = scan->ranges[i];
@@ -102,20 +99,22 @@ DetectObstacle::laser_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr
   obstacle_pub_->publish(point_robot);
 
   //publicar tf del obstáculo
-  geometry_msgs::msg:.TransformStamped tf_msg;
+  geometry_msgs::msg::TransformStamped tf2_msg;
 
-  tf_msg.header.stamp = scan->header.stamp;
-  tf_msg.header.frame_id = "base_link";
-  tf_msg.child_frame_id = "nearest_obstacle";
+  tf2_msg.header.stamp = scan->header.stamp;
+  tf2_msg.header.frame_id = "base_link";
+  tf2_msg.child_frame_id = "nearest_obstacle";
 
-  tf_msg.transform.translation.x = point_robot.point.x;
-  tf_msg.transform.translation.y = point_robot.point.y;
-  tf_msg.transform.translation.z = 0.0;
+  tf2_msg.transform.translation.x = point_robot.point.x;
+  tf2_msg.transform.translation.y = point_robot.point.y;
+  tf2_msg.transform.translation.z = 0.0;
 
-  tf_msg.transform.rotation.x = 0.0;
-  tf_msg.transform.rotation.y = 0.0;
-  tf_msg.transform.rotation.z = 0.0;
-  tf_msg.transform.rotation.w = 1.0;
+  tf2_msg.transform.rotation.x = 0.0;
+  tf2_msg.transform.rotation.y = 0.0;
+  tf2_msg.transform.rotation.z = 0.0;
+  tf2_msg.transform.rotation.w = 1.0;
 
-  tf_broadcaster_->sendTransform(tf_msg);
+  tf_broadcaster_->sendTransform(tf2_msg);
 }
+
+} //namespace practica3

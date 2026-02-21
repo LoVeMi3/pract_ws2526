@@ -1,0 +1,11 @@
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/uninstall.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/practica3_uninstall.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/practica3.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/detectObs.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/test.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/edit_cache.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/rebuild_cache.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/list_install_components.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/install.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/install/local.dir
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles/install/strip.dir

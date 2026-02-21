@@ -9,6 +9,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
+#find_package(clicked_point REQUIRED)
 find_package(kobuki_ros_interfaces REQUIRED)
 
 add_library(${PROJECT_NAME}
@@ -21,7 +22,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
 )
 
-camera/DetectionTo3DfromDepthNode.hpp
+#camera/DetectionTo3DfromDepthNode.hpp
 ament_target_dependencies(${PROJECT_NAME}
   rclcpp
   std_msgs
@@ -30,16 +31,17 @@ ament_target_dependencies(${PROJECT_NAME}
   tf2
   tf2_ros
   tf2_geometry_msgs
+  #clicked_point
   kobuki_ros_interfaces
 )
 
 add_executable(detectObs src/detect_obstacle_main.cpp)
 #add_executable(detect3D src/detection_node_3D_main.cpp)
-target_link_libraries(seguimiento ${PROJECT_NAME})
+target_link_libraries(detectObs ${PROJECT_NAME})
 
 install(TARGETS
   ${PROJECT_NAME}
-  seguimiento
+  detectObs
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -64,6 +66,7 @@ ament_export_dependencies(
   tf2
   tf2_ros
   tf2_geometry_msgs
+  #clicked_point
   kobuki_ros_interfaces
 )
 

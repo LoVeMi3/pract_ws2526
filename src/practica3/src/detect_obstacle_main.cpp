@@ -8,7 +8,7 @@ int main(int argc, char * argv[])
 {
   rclcpp::init(argc, argv);
 
-  auto node_detector = std::make_shared<practica3::DetectObtacle>();
+  auto node_detector = std::make_shared<practica3::DetectObstacle>();
 
   rclcpp::spin(node_detector);
 

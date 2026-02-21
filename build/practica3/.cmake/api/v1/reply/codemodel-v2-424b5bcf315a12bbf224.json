@@ -1,0 +1,88 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-bef242d8bb40c543234d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "practica3",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "detectObs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-detectObs-33f75add21a23e4b7b7f.json",
+					"name" : "detectObs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "practica3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-practica3-b82f4909fde1d39dc4d5.json",
+					"name" : "practica3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "practica3_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-practica3_uninstall-fa92aee3b34abede8ef6.json",
+					"name" : "practica3_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-baf4e8f83ead83cf4211.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3",
+		"source" : "/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
