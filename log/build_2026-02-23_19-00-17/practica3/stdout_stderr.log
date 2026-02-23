@@ -44,7 +44,7 @@
 -- Added test 'uncrustify' to check C / C++ code style
 -- Configured uncrustify additional arguments: 
 -- Added test 'xmllint' to check XML markup files
--- Configuring done (1.2s)
+-- Configuring done (1.3s)
 -- Generating done (0.0s)
 -- Build files have been written to: /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3
 [ 25%] [32mBuilding CXX object CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.o[0m
