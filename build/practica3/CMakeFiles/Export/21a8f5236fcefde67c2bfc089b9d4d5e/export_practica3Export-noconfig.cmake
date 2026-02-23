@@ -24,5 +24,14 @@ set_target_properties(practica3::detectObs PROPERTIES
 list(APPEND _cmake_import_check_targets practica3::detectObs )
 list(APPEND _cmake_import_check_files_for_practica3::detectObs "${_IMPORT_PREFIX}/lib/practica3/detectObs" )
 
+# Import target "practica3::detectNode3d" for configuration ""
+set_property(TARGET practica3::detectNode3d APPEND PROPERTY IMPORTED_CONFIGURATIONS NOCONFIG)
+set_target_properties(practica3::detectNode3d PROPERTIES
+  IMPORTED_LOCATION_NOCONFIG "${_IMPORT_PREFIX}/lib/practica3/detectNode3d"
+  )
+
+list(APPEND _cmake_import_check_targets practica3::detectNode3d )
+list(APPEND _cmake_import_check_files_for_practica3::detectNode3d "${_IMPORT_PREFIX}/lib/practica3/detectNode3d" )
+
 # Commands beyond this point should not need to know the version.
 set(CMAKE_IMPORT_FILE_VERSION)

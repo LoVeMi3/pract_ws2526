@@ -83,17 +83,33 @@ CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3/src/practica3/DetectObstacle.cpp -o CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.s
 
+CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o: CMakeFiles/practica3.dir/flags.make
+CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o: /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3/src/practica3/DetectionNode3D.cpp
+CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o: CMakeFiles/practica3.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o -MF CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o.d -o CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o -c /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3/src/practica3/DetectionNode3D.cpp
+
+CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3/src/practica3/DetectionNode3D.cpp > CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.i
+
+CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3/src/practica3/DetectionNode3D.cpp -o CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.s
+
 # Object files for target practica3
 practica3_OBJECTS = \
-"CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.o"
+"CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.o" \
+"CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o"
 
 # External object files for target practica3
 practica3_EXTERNAL_OBJECTS =
 
 libpractica3.a: CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.o
+libpractica3.a: CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o
 libpractica3.a: CMakeFiles/practica3.dir/build.make
 libpractica3.a: CMakeFiles/practica3.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX static library libpractica3.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX static library libpractica3.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/practica3.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/practica3.dir/link.txt --verbose=$(VERBOSE)
 

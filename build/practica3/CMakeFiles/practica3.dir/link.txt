@@ -1,2 +1,2 @@
-/usr/bin/ar qc libpractica3.a CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.o
+/usr/bin/ar qc libpractica3.a CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.o CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o
 /usr/bin/ranlib libpractica3.a

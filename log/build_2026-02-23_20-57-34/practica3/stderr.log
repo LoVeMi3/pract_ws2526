@@ -1,0 +1,9 @@
+In file included from [01m[K/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3/src/practica3/DetectionNode3D.cpp:10[m[K:
+[01m[K/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3/include/practica3/DetectionNode3D.hpp:17:10:[m[K [01;31m[Kfatal error: [m[Kvision_msgs/msg/detection_2_d.hpp: No such file or directory
+   17 | #include [01;31m[K"vision_msgs/msg/detection_2_d.hpp"[m[K
+      |          [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+compilation terminated.
+gmake[2]: *** [CMakeFiles/practica3.dir/build.make:90: CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o] Error 1
+gmake[2]: *** Waiting for unfinished jobs....
+gmake[1]: *** [CMakeFiles/Makefile2:141: CMakeFiles/practica3.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

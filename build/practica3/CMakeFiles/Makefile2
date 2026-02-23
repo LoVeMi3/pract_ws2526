@@ -65,6 +65,7 @@ CMAKE_BINARY_DIR = /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/bu
 # The main recursive "all" target.
 all: CMakeFiles/practica3.dir/all
 all: CMakeFiles/detectObs.dir/all
+all: CMakeFiles/detectNode3d.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -76,6 +77,7 @@ clean: CMakeFiles/uninstall.dir/clean
 clean: CMakeFiles/practica3_uninstall.dir/clean
 clean: CMakeFiles/practica3.dir/clean
 clean: CMakeFiles/detectObs.dir/clean
+clean: CMakeFiles/detectNode3d.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -137,12 +139,12 @@ CMakeFiles/practica3_uninstall.dir/clean:
 CMakeFiles/practica3.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/practica3.dir/build.make CMakeFiles/practica3.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/practica3.dir/build.make CMakeFiles/practica3.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles --progress-num=3,4 "Built target practica3"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles --progress-num=5,6,7 "Built target practica3"
 .PHONY : CMakeFiles/practica3.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/practica3.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/practica3.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles 0
 .PHONY : CMakeFiles/practica3.dir/rule
@@ -163,12 +165,12 @@ CMakeFiles/practica3.dir/clean:
 CMakeFiles/detectObs.dir/all: CMakeFiles/practica3.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectObs.dir/build.make CMakeFiles/detectObs.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectObs.dir/build.make CMakeFiles/detectObs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles --progress-num=1,2 "Built target detectObs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles --progress-num=3,4 "Built target detectObs"
 .PHONY : CMakeFiles/detectObs.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/detectObs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles 5
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/detectObs.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles 0
 .PHONY : CMakeFiles/detectObs.dir/rule
@@ -181,6 +183,32 @@ detectObs: CMakeFiles/detectObs.dir/rule
 CMakeFiles/detectObs.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectObs.dir/build.make CMakeFiles/detectObs.dir/clean
 .PHONY : CMakeFiles/detectObs.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/detectNode3d.dir
+
+# All Build rule for target.
+CMakeFiles/detectNode3d.dir/all: CMakeFiles/practica3.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectNode3d.dir/build.make CMakeFiles/detectNode3d.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectNode3d.dir/build.make CMakeFiles/detectNode3d.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles --progress-num=1,2 "Built target detectNode3d"
+.PHONY : CMakeFiles/detectNode3d.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/detectNode3d.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles 5
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/detectNode3d.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3/CMakeFiles 0
+.PHONY : CMakeFiles/detectNode3d.dir/rule
+
+# Convenience name for target.
+detectNode3d: CMakeFiles/detectNode3d.dir/rule
+.PHONY : detectNode3d
+
+# clean rule for target.
+CMakeFiles/detectNode3d.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectNode3d.dir/build.make CMakeFiles/detectNode3d.dir/clean
+.PHONY : CMakeFiles/detectNode3d.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

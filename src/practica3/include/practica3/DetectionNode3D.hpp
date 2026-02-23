@@ -15,6 +15,7 @@
 #include "sensor_msgs/msg/image.hpp"
 #include "sensor_msgs/msg/camera_info.hpp"
 #include "vision_msgs/msg/detection_2_d.hpp"
+#include "vision_msgs/msg/detection_3_d.hpp"
 #include "std_msgs/msg/bool.hpp"
 #include "rclcpp/rclcpp.hpp"
 

@@ -223,6 +223,19 @@ detectObs/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectObs.dir/build.make CMakeFiles/detectObs.dir/build
 .PHONY : detectObs/fast
 
+#=============================================================================
+# Target rules for targets named detectNode3d
+
+# Build rule for target.
+detectNode3d: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 detectNode3d
+.PHONY : detectNode3d
+
+# fast build rule for target.
+detectNode3d/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectNode3d.dir/build.make CMakeFiles/detectNode3d.dir/build
+.PHONY : detectNode3d/fast
+
 src/detect_obstacle_main.o: src/detect_obstacle_main.cpp.o
 .PHONY : src/detect_obstacle_main.o
 
@@ -246,6 +259,30 @@ src/detect_obstacle_main.s: src/detect_obstacle_main.cpp.s
 src/detect_obstacle_main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectObs.dir/build.make CMakeFiles/detectObs.dir/src/detect_obstacle_main.cpp.s
 .PHONY : src/detect_obstacle_main.cpp.s
+
+src/detection_node_3d.o: src/detection_node_3d.cpp.o
+.PHONY : src/detection_node_3d.o
+
+# target to build an object file
+src/detection_node_3d.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectNode3d.dir/build.make CMakeFiles/detectNode3d.dir/src/detection_node_3d.cpp.o
+.PHONY : src/detection_node_3d.cpp.o
+
+src/detection_node_3d.i: src/detection_node_3d.cpp.i
+.PHONY : src/detection_node_3d.i
+
+# target to preprocess a source file
+src/detection_node_3d.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectNode3d.dir/build.make CMakeFiles/detectNode3d.dir/src/detection_node_3d.cpp.i
+.PHONY : src/detection_node_3d.cpp.i
+
+src/detection_node_3d.s: src/detection_node_3d.cpp.s
+.PHONY : src/detection_node_3d.s
+
+# target to generate assembly for a file
+src/detection_node_3d.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/detectNode3d.dir/build.make CMakeFiles/detectNode3d.dir/src/detection_node_3d.cpp.s
+.PHONY : src/detection_node_3d.cpp.s
 
 src/practica3/DetectObstacle.o: src/practica3/DetectObstacle.cpp.o
 .PHONY : src/practica3/DetectObstacle.o
@@ -271,6 +308,30 @@ src/practica3/DetectObstacle.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/practica3.dir/build.make CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.s
 .PHONY : src/practica3/DetectObstacle.cpp.s
 
+src/practica3/DetectionNode3D.o: src/practica3/DetectionNode3D.cpp.o
+.PHONY : src/practica3/DetectionNode3D.o
+
+# target to build an object file
+src/practica3/DetectionNode3D.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/practica3.dir/build.make CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o
+.PHONY : src/practica3/DetectionNode3D.cpp.o
+
+src/practica3/DetectionNode3D.i: src/practica3/DetectionNode3D.cpp.i
+.PHONY : src/practica3/DetectionNode3D.i
+
+# target to preprocess a source file
+src/practica3/DetectionNode3D.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/practica3.dir/build.make CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.i
+.PHONY : src/practica3/DetectionNode3D.cpp.i
+
+src/practica3/DetectionNode3D.s: src/practica3/DetectionNode3D.cpp.s
+.PHONY : src/practica3/DetectionNode3D.s
+
+# target to generate assembly for a file
+src/practica3/DetectionNode3D.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/practica3.dir/build.make CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.s
+.PHONY : src/practica3/DetectionNode3D.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -286,14 +347,21 @@ help:
 	@echo "... test"
 	@echo "... practica3_uninstall"
 	@echo "... uninstall"
+	@echo "... detectNode3d"
 	@echo "... detectObs"
 	@echo "... practica3"
 	@echo "... src/detect_obstacle_main.o"
 	@echo "... src/detect_obstacle_main.i"
 	@echo "... src/detect_obstacle_main.s"
+	@echo "... src/detection_node_3d.o"
+	@echo "... src/detection_node_3d.i"
+	@echo "... src/detection_node_3d.s"
 	@echo "... src/practica3/DetectObstacle.o"
 	@echo "... src/practica3/DetectObstacle.i"
 	@echo "... src/practica3/DetectObstacle.s"
+	@echo "... src/practica3/DetectionNode3D.o"
+	@echo "... src/practica3/DetectionNode3D.i"
+	@echo "... src/practica3/DetectionNode3D.s"
 .PHONY : help
 
 

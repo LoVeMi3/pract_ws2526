@@ -101,6 +101,14 @@ detectObs: /opt/ros/jazzy/lib/libsensor_msgs__rosidl_generator_py.so
 detectObs: /opt/ros/jazzy/lib/libsensor_msgs__rosidl_typesupport_c.so
 detectObs: /opt/ros/jazzy/lib/libsensor_msgs__rosidl_typesupport_cpp.so
 detectObs: /opt/ros/jazzy/lib/libsensor_msgs__rosidl_generator_c.so
+detectObs: /opt/ros/jazzy/lib/libvision_msgs__rosidl_typesupport_fastrtps_c.so
+detectObs: /opt/ros/jazzy/lib/libvision_msgs__rosidl_typesupport_fastrtps_cpp.so
+detectObs: /opt/ros/jazzy/lib/libvision_msgs__rosidl_typesupport_introspection_c.so
+detectObs: /opt/ros/jazzy/lib/libvision_msgs__rosidl_typesupport_introspection_cpp.so
+detectObs: /opt/ros/jazzy/lib/libvision_msgs__rosidl_typesupport_cpp.so
+detectObs: /opt/ros/jazzy/lib/libvision_msgs__rosidl_generator_py.so
+detectObs: /opt/ros/jazzy/lib/libvision_msgs__rosidl_typesupport_c.so
+detectObs: /opt/ros/jazzy/lib/libvision_msgs__rosidl_generator_c.so
 detectObs: /opt/ros/jazzy/lib/libstatic_transform_broadcaster_node.so
 detectObs: /opt/ros/jazzy/lib/libtf2_ros.so
 detectObs: /opt/ros/jazzy/lib/libtf2.so

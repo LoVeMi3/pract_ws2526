@@ -6,15 +6,15 @@ find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(vision_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
-#find_package(clicked_point REQUIRED)
 find_package(kobuki_ros_interfaces REQUIRED)
 
 add_library(${PROJECT_NAME}
   src/practica3/DetectObstacle.cpp
-  #src/practica3/DetectionNode3D.cpp
+  src/practica3/DetectionNode3D.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -22,26 +22,27 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include/${PROJECT_NAME}>
 )
 
-#camera/DetectionTo3DfromDepthNode.hpp
 ament_target_dependencies(${PROJECT_NAME}
   rclcpp
   std_msgs
   geometry_msgs
   sensor_msgs
+  vision_msgs
   tf2
   tf2_ros
   tf2_geometry_msgs
-  #clicked_point
   kobuki_ros_interfaces
 )
 
 add_executable(detectObs src/detect_obstacle_main.cpp)
-#add_executable(detect3D src/detection_node_3D_main.cpp)
+add_executable(detectNode3d src/detection_node_3d.cpp)
 target_link_libraries(detectObs ${PROJECT_NAME})
+target_link_libraries(detectNode3d ${PROJECT_NAME})
 
 install(TARGETS
   ${PROJECT_NAME}
   detectObs
+  detectNode3d
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -63,10 +64,11 @@ ament_export_dependencies(
   std_msgs
   geometry_msgs
   sensor_msgs
+  vision_msgs
   tf2
   tf2_ros
   tf2_geometry_msgs
-  #clicked_point
+
   kobuki_ros_interfaces
 )
 
