@@ -24,7 +24,7 @@ def generate_launch_description():
                           ('output_detection_2d', 'detection_2d'),
                         ])
 
-    #paso3
+    #paso2
     convert_2d_3d = Node(package='camera',
                         executable='detection_to_3d_from_depth_node',
                         output='screen',
@@ -38,15 +38,27 @@ def generate_launch_description():
 
     #paso1
     detect_laser_cmd = Node(package='practica3',
-                            executable='detect_obstacle',
+                            executable='detectObs',
                             output='screen',
                             remappings=[
                               ('input_scan', '/scan_raw')
                             ])
 
+    #paso3
+    detection_3d = Node(package='practica3',
+                        executable='detectNode3d',
+                        output='screen',
+                        remappings=[
+                          ('input_depth', '/rgbd_camera/depth/image_raw'),
+                          ('input_detection_2d', 'detection_2d'),
+                          ('camera_info', '/rgbd_camera/camera_info'),
+                          ('output_detection_3d', 'detection_3d')
+                        ])
+
     ld = LaunchDescription()
     ld.add_action(detect_img_cmd)
     ld.add_action(convert_2d_3d)
     ld.add_action(detect_laser_cmd)
+    ld.add_action(detection_3d)
 
     return ld
