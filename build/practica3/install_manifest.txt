@@ -1,0 +1,5 @@
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica3/lib/libpractica3.so
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica3/lib/practica3/detectObs
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica3/lib/practica3/detectNode3d
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica3/share/practica3/cmake/export_practica3Export.cmake
+/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/install/practica3/share/practica3/cmake/export_practica3Export-noconfig.cmake

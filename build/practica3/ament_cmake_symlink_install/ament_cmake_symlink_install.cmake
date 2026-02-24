@@ -310,6 +310,9 @@ message(STATUS "Execute custom install script")
 
 # begin of custom install code
 
+# install(DIRECTORY "launch" "DESTINATION" "share/practica3")
+ament_cmake_symlink_install_directory("/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3" DIRECTORY "launch" "DESTINATION" "share/practica3")
+
 # install(FILES "/opt/ros/jazzy/lib/python3.12/site-packages/ament_package/template/environment_hook/library_path.sh" "DESTINATION" "share/practica3/environment")
 ament_cmake_symlink_install_files("/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3" FILES "/opt/ros/jazzy/lib/python3.12/site-packages/ament_package/template/environment_hook/library_path.sh" "DESTINATION" "share/practica3/environment")
 

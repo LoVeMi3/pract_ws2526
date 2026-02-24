@@ -11,11 +11,10 @@
 #include "geometry_msgs/msg/transform_stamped.hpp"
 #include "geometry_msgs/msg/point_stamped.hpp"
 
-//#include "sensor_msgs/msg/laser_scan.hpp"
 #include "sensor_msgs/msg/image.hpp"
 #include "sensor_msgs/msg/camera_info.hpp"
-#include "vision_msgs/msg/detection_2_d.hpp"
-#include "vision_msgs/msg/detection_3_d.hpp"
+#include "vision_msgs/msg/detection2_d.hpp"
+#include "vision_msgs/msg/detection3_d.hpp"
 #include "std_msgs/msg/bool.hpp"
 #include "rclcpp/rclcpp.hpp"
 
@@ -42,9 +41,9 @@ private:
   std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
   std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
-  std::shared_ptr<vision_msgs::msg::Detection2D> last_detection_;
-  std::shared_ptr<sensor_msgs::msg::Image> last_depth_;
-  std::shared_ptr<sensor_msgs::msg::CameraInfo> last_cam_info_;
+  vision_msgs::msg::Detection2D::ConstSharedPtr last_detection_;
+  sensor_msgs::msg::Image::ConstSharedPtr last_depth_;
+  sensor_msgs::msg::CameraInfo::ConstSharedPtr last_cam_info_;
 
   float min_distance_ {0.5f};
 };

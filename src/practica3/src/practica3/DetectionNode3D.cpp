@@ -9,12 +9,11 @@
 
 #include "practica3/DetectionNode3D.hpp"
 
-//#include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_msgs/msg/bool.hpp"
 #include "sensor_msgs/msg/image.hpp"
 #include "sensor_msgs/msg/camera_info.hpp"
-#include "vision_msgs/msg/detection_2_d.hpp"
-#include "vision_msgs/msg/detection_3_d.hpp"
+#include "vision_msgs/msg/detection2_d.hpp"
+#include "vision_msgs/msg/detection3_d.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 
@@ -44,7 +43,7 @@ DetectionNode3D::DetectionNode3D()
 
   vision_2d_sub_ = create_subscription<vision_msgs::msg::Detection2D>("input_detection_2d", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::vision_2d_callback, this, std::placeholders::_1));
   img_depth_sub_ = create_subscription<sensor_msgs::msg::Image>("input_depth", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_depth_callback, this, std::placeholders::_1));
-  img_cam_info_sub_ = create_subscription<sensor_msgs::msg::Image>("camera_info", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_cam_info_callback, this, std::placeholders::_1));
+  img_cam_info_sub_ = create_subscription<sensor_msgs::msg::CameraInfo>("camera_info", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_cam_info_callback, this, std::placeholders::_1));
 
   vision_3d_pub_ = create_publisher<vision_msgs::msg::Detection3D>("/detection_3d", 10);
 
@@ -110,8 +109,8 @@ DetectionNode3D::publish_vision() {
   float cx = last_cam_info_->k[2];
   float cy = last_cam_info_->k[5];
 
-  float X = (u - cx) * Z / fx
-  float Y = (v - cy) * Z / fy
+  float X = ((u - cx) * Z) / fx;
+  float Y = ((v - cy) * Z) / fy;
 
   //publicar la imagen detectada en 3d
   vision_msgs::msg::Detection3D det_3d;
@@ -134,7 +133,7 @@ DetectionNode3D::publish_vision() {
   //publicar la tf asociada a la visión
   geometry_msgs::msg::TransformStamped tf2_msg;
 
-  tf2_msg.header.stamp = this->header.stamp;
+  tf2_msg.header.stamp = last_detection_->header.stamp;
   tf2_msg.header.frame_id = last_detection_->header.frame_id;
   tf2_msg.child_frame_id = "target";
 

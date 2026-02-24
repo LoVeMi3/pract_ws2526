@@ -1,0 +1,97 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-bf8baafe833a04a53b8c.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.15"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "practica3",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "detectNode3d::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-detectNode3d-7d0e1b0792410373be1f.json",
+					"name" : "detectNode3d",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "detectObs::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-detectObs-606c18238aac6d3caf40.json",
+					"name" : "detectObs",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "practica3::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-practica3-73718a677dd4a1435252.json",
+					"name" : "practica3",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "practica3_uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-practica3_uninstall-b7af54a64ca3770a8b63.json",
+					"name" : "practica3_uninstall",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "uninstall::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-uninstall-47efd46cf39f12405540.json",
+					"name" : "uninstall",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3",
+		"source" : "/home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/src/practica3"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
