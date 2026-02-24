@@ -15,7 +15,7 @@ def generate_launch_description():
 
     #paso2
     detect_img_cmd = Node(package='camera',
-                        executable='hsv_filter_node',
+                        executable='hsv_filter',
                         output='screen',
                         parameters=[param_file_cam],
                         remappings=[
@@ -26,7 +26,7 @@ def generate_launch_description():
 
     #paso2
     convert_2d_3d = Node(package='camera',
-                        executable='detection_to_3d_from_depth_node',
+                        executable='detection_2d_to_3d_depth',
                         output='screen',
                         parameters=[param_file_cam],
                         remappings=[

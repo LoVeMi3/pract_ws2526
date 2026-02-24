@@ -44,15 +44,15 @@
 -- Added test 'uncrustify' to check C / C++ code style
 -- Configured uncrustify additional arguments: 
 -- Added test 'xmllint' to check XML markup files
--- Configuring done (2.2s)
+-- Configuring done (1.2s)
 -- Generating done (0.0s)
 -- Build files have been written to: /home/lorea/Documents/25-26/Arqui_Soft_Robots/pract_ws2526/build/practica3
 [ 14%] [32mBuilding CXX object CMakeFiles/practica3.dir/src/practica3/DetectObstacle.cpp.o[0m
 [ 28%] [32mBuilding CXX object CMakeFiles/practica3.dir/src/practica3/DetectionNode3D.cpp.o[0m
 [ 42%] [32m[1mLinking CXX shared library libpractica3.so[0m
 [ 42%] Built target practica3
-[ 57%] [32mBuilding CXX object CMakeFiles/detectNode3d.dir/src/detection_node_3d.cpp.o[0m
 [ 71%] [32mBuilding CXX object CMakeFiles/detectObs.dir/src/detect_obstacle_main.cpp.o[0m
+[ 71%] [32mBuilding CXX object CMakeFiles/detectNode3d.dir/src/detection_node_3d.cpp.o[0m
 [ 85%] [32m[1mLinking CXX executable detectObs[0m
 [100%] [32m[1mLinking CXX executable detectNode3d[0m
 [100%] Built target detectObs
