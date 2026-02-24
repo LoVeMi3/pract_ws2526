@@ -19,6 +19,8 @@ find_package(tf2_geometry_msgs REQUIRED)
 add_library(${PROJECT_NAME} SHARED
   src/practica3/DetectObstacle.cpp
   src/practica3/DetectionNode3D.cpp
+  src/practica3/OrientationNode.cpp
+  src/practica3/PIDController.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
@@ -44,10 +46,14 @@ target_link_libraries(detectObs ${PROJECT_NAME})
 add_executable(detectNode3d src/detection_node_3d.cpp)
 target_link_libraries(detectNode3d ${PROJECT_NAME})
 
+add_executable(orientation src/orientation_node_main.cpp)
+target_link_libraries(orientation ${PROJECT_NAME})
+
 install(TARGETS
   ${PROJECT_NAME}
   detectObs
   detectNode3d
+  orientation
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib

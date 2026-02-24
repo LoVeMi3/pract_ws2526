@@ -28,126 +28,77 @@
 
 #include "geometry_msgs/msg/point_stamped.hpp"
 #include "geometry_msgs/msg/transform_stamped.hpp"
+#include "geometry_msgs/msg/twist.hpp"
 
-// executable='' VERYIMPORTANT
+// executable='orientation' VERYIMPORTANT
 
 using namespace std::chrono_literals;
 
 namespace practica3 {
 
 OrientationNode::OrientationNode()
-: Node("detection_node_3_d"), tf_buffer_(this->get_clock())
+: Node("orientation_node"), tf_buffer_(/*this->get_clock()*/), tf_listener_(tf_buffer_), vlin_pid_(0.0, 1.0, 0.0, 0.7), vrot_pid_(0.0, 1.0, 0.3, 1.0)
 {
-  declare_parameter("min_distance", min_distance_);
-  get_parameter("min_distance", min_distance_);
+  vision_3d_sub_ = create_subscription<vision_msgs::msg::Detection3D>("output_detection_3d", rclcpp::SensorDataQoS().reliable(), std::bind(&OrientationNode::vision_3d_callback, this, std::placeholders::_1));
 
-  vision_2d_sub_ = create_subscription<vision_msgs::msg::Detection2D>("input_detection_2d", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::vision_2d_callback, this, std::placeholders::_1));
-  img_depth_sub_ = create_subscription<sensor_msgs::msg::Image>("input_depth", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_depth_callback, this, std::placeholders::_1));
-  img_cam_info_sub_ = create_subscription<sensor_msgs::msg::CameraInfo>("camera_info", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_cam_info_callback, this, std::placeholders::_1));
-
-  vision_3d_pub_ = create_publisher<vision_msgs::msg::Detection3D>("/detection_3d", 10);
+  vel_publisher_ = create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
+  timer_ = create_wall_timer(50ms, std::bind(&OrientationNode::control_cycle, this));
 
   tf_listener_ = std::make_shared<tf2_ros::TransformListener>(tf_buffer_);
   tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
 }
 
 void
-OrientationNode::vision_2d_callback(const vision_msgs::msg::Detection2D::ConstSharedPtr & vision)
+OrientationNode::vision_3d_callback(const vision_msgs::msg::Detection3D::ConstSharedPtr & vision)
 {
   last_detection_ = vision;
 
-  if (!last_depth_ || !last_cam_info_) {
-    RCLCPP_WARN(this->get_logger(), "No recibidos depth o camera_info de imagen 2D");
+  if (!last_detection_) {
+    RCLCPP_WARN(get_logger(), "Error en la detección de la visión 3D.");
+    //el robot debe girar hasta encontrar la vision
+    find_vision();
     return;
   }
 
-  publish_vision();
+  control_cycle();
 }
 
 void
-OrientationNode::img_depth_callback(const sensor_msgs::msg::Image::ConstSharedPtr & img)
+OrientationNode::control_cycle()
 {
-  last_depth_ = img;
-}
+  tf2::Stamped<tf2::Transform> bf2target;
+  std::string error;
 
-void
-OrientationNode::img_cam_info_callback(const sensor_msgs::msg::CameraInfo::ConstSharedPtr & info)
-{
-  last_cam_info_ = info;
-}
-/*
-Centro del bounding box 2D → (u, v)
-Profundidad en ese píxel → Z
-Intrínsecos de cámara → fx, fy, cx, cy
+  if (tf_buffer_.canTransform("base_footprint", "target", tf2::TimePointZero, &error)) {
+    auto bf2target_msg = tf_buffer_.lookupTransform(
+    "base_footprint", "target", tf2::TimePointZero);
 
-X = (u - cx) * Z / fx
-Y = (v - cy) * Z / fy
-Z = Z
+    tf2::fromMsg(bf2target_msg, bf2target);
 
-K = [fx  0 cx]
-    [0  fy cy]
-    [0   0  1]
-*/
-void
-OrientationNode::publish_vision() {
-  float u = last_detection_->bbox.center.position.x;
-  float v = last_detection_->bbox.center.position.y;
+    double x = bf2target.getOrigin().x();
+    double y = bf2target.getOrigin().y();
 
-  int width = last_depth_->width;
-  int x = static_cast<int>(u);
-  int y = static_cast<int>(v);
+    double angle = atan2(y, x);
+    double dist = sqrt(x * x + y * y);
 
-  float * depth_data = (float *) &last_depth_->data[0];
-  float Z = depth_data[y * width + x];
+    double vel_rot = std::clamp(vrot_pid_.get_output(angle), -2.0, 2.0);
+    double vel_lin = std::clamp(vlin_pid_.get_output(dist - 1.0), -1.0, 1.0);
 
-  if (std::isnan(Z) || Z < min_distance_) {
-    return;
+    geometry_msgs::msg::Twist twist;
+    twist.linear.x = vel_lin;
+    twist.angular.z = vel_rot;
+
+    vel_publisher_->publish(twist);
+
+  } else {
+    RCLCPP_WARN_STREAM(get_logger(), "Error in TF odom -> base_footprint [<< " << error << "]");
   }
-
-  float fx = last_cam_info_->k[0];
-  float fy = last_cam_info_->k[4];
-  float cx = last_cam_info_->k[2];
-  float cy = last_cam_info_->k[5];
-
-  float X = ((u - cx) * Z) / fx;
-  float Y = ((v - cy) * Z) / fy;
-
-  //publicar la imagen detectada en 3d
-  vision_msgs::msg::Detection3D det_3d;
-
-  det_3d.header = last_detection_->header;
-  det_3d.results = last_detection_->results;
-
-  det_3d.bbox.center.position.x = X;
-  det_3d.bbox.center.position.y = Y;
-  det_3d.bbox.center.position.z = Z;
-
-  det_3d.bbox.center.orientation.w = 1.0;  // sin rotación
-
-  det_3d.bbox.size.x = 0.2;
-  det_3d.bbox.size.y = 0.2;
-  det_3d.bbox.size.z = 0.2;
-
-  vision_3d_pub_->publish(det_3d);
-
-  //publicar la tf asociada a la visión
-  geometry_msgs::msg::TransformStamped tf2_msg;
-
-  tf2_msg.header.stamp = last_detection_->header.stamp;
-  tf2_msg.header.frame_id = last_detection_->header.frame_id;
-  tf2_msg.child_frame_id = "target";
-
-  tf2_msg.transform.translation.x = X;
-  tf2_msg.transform.translation.y = Y;
-  tf2_msg.transform.translation.z = Z;
-
-  tf2_msg.transform.rotation.x = 0.0;
-  tf2_msg.transform.rotation.y = 0.0;
-  tf2_msg.transform.rotation.z = 0.0;
-  tf2_msg.transform.rotation.w = 1.0;
-
-  tf_broadcaster_->sendTransform(tf2_msg);
 }
 
+void
+OrientationNode::find_vision()
+{
+  RCLCPP_INFO(get_logger(), "Esta función tiene que encontrar la pelota/persona de nuevo");
+}
 } //namespace practica3
 

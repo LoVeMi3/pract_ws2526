@@ -55,10 +55,32 @@ def generate_launch_description():
                           ('output_detection_3d', 'detection_3d')
                         ])
 
+    #paso4
+    orientation_node = Node(package='practica3',
+                        executable='orientation',
+                        output='screen',
+                        parameters=[
+                          {'use_sim_time': True}
+                        ])
+                        remappings=[
+                          ('output_detection_3d', 'detection_3d')
+                        ])
+
+    #seeker_cmd = Node(
+    #        package='tf_seeker',
+    #        executable='seeker',
+    #        name='seeker',
+    #        output='screen',
+    #        parameters=[
+    #          {'use_sim_time': True}
+    #        ])
+
     ld = LaunchDescription()
     ld.add_action(detect_img_cmd)
     ld.add_action(convert_2d_3d)
     ld.add_action(detect_laser_cmd)
     ld.add_action(detection_3d)
+    ld.add_action(orientation_node)
+    ld.add_action(seeker_cmd)
 
     return ld

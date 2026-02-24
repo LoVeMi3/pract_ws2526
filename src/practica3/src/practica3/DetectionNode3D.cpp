@@ -89,7 +89,8 @@ K = [fx  0 cx]
     [0   0  1]
 */
 void
-DetectionNode3D::publish_vision() {
+DetectionNode3D::publish_vision()
+{
   float u = last_detection_->bbox.center.position.x;
   float v = last_detection_->bbox.center.position.y;
 

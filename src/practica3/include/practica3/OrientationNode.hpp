@@ -25,27 +25,22 @@ class OrientationNode : public rclcpp::Node
 public:
   OrientationNode();
 private:
-  void vision_2d_callback(const vision_msgs::msg::Detection2D::ConstSharedPtr & vision);
-  void img_depth_callback(const sensor_msgs::msg::Image::ConstSharedPtr & img);
-  void img_cam_info_callback(const sensor_msgs::msg::CameraInfo::ConstSharedPtr & info);
+  void vision_3d_callback(const vision_msgs::msg::Detection3D::ConstSharedPtr & vision);
 
-  rclcpp::Subscription<vision_msgs::msg::Detection2D>::SharedPtr vision_2d_sub_;
-  rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr img_depth_sub_;
-  rclcpp::Subscription<sensor_msgs::msg::CameraInfo>::SharedPtr img_cam_info_sub_;
+  rclcpp::Subscription<vision_msgs::msg::Detection3D>::SharedPtr vision_3d_sub_;
 
-  rclcpp::Publisher<vision_msgs::msg::Detection3D>::SharedPtr vision_3d_pub_;
+  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_publisher_;
 
-  void publish_vision();
+  void control_cycle();
+  void find_vision();
 
   tf2_ros::Buffer tf_buffer_;
   std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
   std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
-  vision_msgs::msg::Detection2D::ConstSharedPtr last_detection_;
-  sensor_msgs::msg::Image::ConstSharedPtr last_depth_;
-  sensor_msgs::msg::CameraInfo::ConstSharedPtr last_cam_info_;
+  vision_msgs::msg::Detection3D::ConstSharedPtr last_detection_;
 
-  float min_distance_ {0.5f};
+  PIDController vlin_pid_, vrot_pid_;
 };
 
 }
