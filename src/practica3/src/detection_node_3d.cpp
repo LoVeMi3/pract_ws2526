@@ -1,5 +1,4 @@
 //main de nodo DetectionNode3d.cpp
-//main del nodo DetectObstacle.cpp
 #include <memory>
 
 #include "practica3/DetectionNode3D.hpp"
@@ -16,4 +15,3 @@ int main(int argc, char * argv[])
   rclcpp::shutdown();
   return 0;
 }
-
