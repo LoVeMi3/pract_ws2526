@@ -86,6 +86,14 @@ OrientationNode::control_cycle()
     double vel_lin = std::clamp(vlin_pid_.get_output(dist - 1.0), -1.0, 1.0);
 
     geometry_msgs::msg::Twist twist;
+
+    if (dist < 1.5) {
+      twist.linear.x = -vel_lin;
+      twist.angular.z = 0.0;
+
+      vel_publisher_->publish(twist);
+    }
+
     twist.linear.x = vel_lin;
     twist.angular.z = vel_rot;
 
@@ -105,7 +113,7 @@ OrientationNode::find_vision()
   twist.angular.z = 0.5;
 
   vel_publisher_->publish(twist);
-  
+
   RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 2000, "Buscando objetivo... vroom... vroom");
 }
 } //namespace practica3
