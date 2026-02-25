@@ -56,7 +56,7 @@ OrientationNode::vision_3d_callback(const vision_msgs::msg::Detection3D::ConstSh
 
   if (!last_detection_) {
     RCLCPP_WARN(get_logger(), "Error en la detección de la visión 3D.");
-    //el robot debe girar hasta encontrar la vision
+    //el robot debe girar hasta encontrar la visión
     find_vision();
     return;
   }
@@ -92,14 +92,21 @@ OrientationNode::control_cycle()
     vel_publisher_->publish(twist);
 
   } else {
-    RCLCPP_WARN_STREAM(get_logger(), "Error in TF odom -> base_footprint [<< " << error << "]");
+    //no existe el frame target, habrá que buscarlo
+    find_vision();
   }
 }
 
 void
 OrientationNode::find_vision()
 {
-  RCLCPP_INFO(get_logger(), "Esta función tiene que encontrar la pelota/persona de nuevo");
+  geometry_msgs::msg::Twist twist;
+  twist.linear.x = 0.03;
+  twist.angular.z = 0.5;
+
+  vel_publisher_->publish(twist);
+  
+  RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 2000, "Buscando objetivo... vroom... vroom");
 }
 } //namespace practica3
 
