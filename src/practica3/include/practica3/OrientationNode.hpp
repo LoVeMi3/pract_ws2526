@@ -5,6 +5,8 @@
 
 #include <memory>
 
+#include "practica3/PIDController.hpp"
+
 #include "tf2_ros/buffer.h"
 #include "tf2_ros/transform_listener.h"
 #include "tf2_ros/transform_broadcaster.h"

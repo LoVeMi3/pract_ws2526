@@ -8,6 +8,7 @@
 #include <random>
 
 #include "practica3/OrientationNode.hpp"
+#include "practica3/PIDController.hpp"
 
 #include "std_msgs/msg/bool.hpp"
 #include "sensor_msgs/msg/image.hpp"
