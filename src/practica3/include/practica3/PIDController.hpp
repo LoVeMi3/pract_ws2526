@@ -13,12 +13,12 @@
 // limitations under the License.
 
 
-#ifndef TF_SEEKER__PIDCONTROLLER_HPP_
-#define TF_SEEKER__PIDCONTROLLER_HPP_
+#ifndef PRACTICA3__PIDCONTROLLER_HPP_
+#define PRACTICA3__PIDCONTROLLER_HPP_
 
 #include <cmath>
 
-namespace tf_seeker
+namespace practica3
 {
 
 class PIDController
@@ -37,6 +37,6 @@ private:
   double prev_error_, int_error_;
 };
 
-}  // namespace tf_seeker
+}  // namespace practica3
 
-#endif  // TF_SEEKER__PIDCONTROLLER_HPP_
+#endif  // PRACTICA3__PIDCONTROLLER_HPP_

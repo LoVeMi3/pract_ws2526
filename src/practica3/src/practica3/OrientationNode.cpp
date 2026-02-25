@@ -38,7 +38,7 @@ using namespace std::chrono_literals;
 namespace practica3 {
 
 OrientationNode::OrientationNode()
-: Node("orientation_node"), tf_buffer_(/*this->get_clock()*/), tf_listener_(tf_buffer_), vlin_pid_(0.0, 1.0, 0.0, 0.7), vrot_pid_(0.0, 1.0, 0.3, 1.0)
+: Node("orientation_node"), tf_buffer_(this->get_clock()), vlin_pid_(0.0, 1.0, 0.0, 0.7), vrot_pid_(0.0, 1.0, 0.3, 1.0)
 {
   vision_3d_sub_ = create_subscription<vision_msgs::msg::Detection3D>("output_detection_3d", rclcpp::SensorDataQoS().reliable(), std::bind(&OrientationNode::vision_3d_callback, this, std::placeholders::_1));
 

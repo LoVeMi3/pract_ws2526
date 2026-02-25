@@ -14,9 +14,9 @@
 
 #include <algorithm>
 
-#include "tf_seeker/PIDController.hpp"
+#include "practica3/PIDController.hpp"
 
-namespace tf_seeker
+namespace practica3
 {
 
 PIDController::PIDController(double min_ref, double max_ref, double min_output, double max_output)

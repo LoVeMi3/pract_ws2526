@@ -42,6 +42,8 @@ private:
 
   vision_msgs::msg::Detection3D::ConstSharedPtr last_detection_;
 
+  rclcpp::TimerBase::SharedPtr timer_;
+
   PIDController vlin_pid_, vrot_pid_;
 };
 
