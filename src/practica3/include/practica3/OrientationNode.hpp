@@ -28,6 +28,7 @@ public:
   OrientationNode();
 private:
   void vision_3d_callback(const vision_msgs::msg::Detection3D::ConstSharedPtr & vision);
+  void nearest_obstacle_callback(const geometry_msgs::msg::PointStamped::ConstSharedPtr & obstacle);
 
   rclcpp::Subscription<vision_msgs::msg::Detection3D>::SharedPtr vision_3d_sub_;
   rclcpp::Subscription<geometry_msgs::msg::PointStamped>::SharedPtr obstacle_sub_;
@@ -35,14 +36,13 @@ private:
   rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_publisher_;
 
   void control_cycle();
-  void find_vision();
 
   tf2_ros::Buffer tf_buffer_;
   std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
   std::shared_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
 
   vision_msgs::msg::Detection3D::ConstSharedPtr last_detection_;
-  geometry_msgs::msg::PointStamped::SharedPtr last_obstacle_;
+  geometry_msgs::msg::PointStamped::ConstSharedPtr last_obstacle_;
   rclcpp::TimerBase::SharedPtr timer_;
 
   PIDController vlin_pid_, vrot_pid_;

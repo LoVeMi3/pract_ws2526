@@ -29,6 +29,10 @@
 #include "geometry_msgs/msg/point_stamped.hpp"
 #include "geometry_msgs/msg/transform_stamped.hpp"
 
+#include "message_filters/subscriber.h"
+#include "message_filters/synchronizer.h"
+#include "message_filters/sync_policies/approximate_time.h"
+
 // executable='detectNode3d' VERYIMPORTANT
 
 using namespace std::chrono_literals;
@@ -41,16 +45,34 @@ DetectionNode3D::DetectionNode3D()
   declare_parameter("min_distance", min_distance_);
   get_parameter("min_distance", min_distance_);
 
-  vision_2d_sub_ = create_subscription<vision_msgs::msg::Detection2D>("input_detection_2d", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::vision_2d_callback, this, std::placeholders::_1));
-  img_depth_sub_ = create_subscription<sensor_msgs::msg::Image>("input_depth", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_depth_callback, this, std::placeholders::_1));
+  //vision_2d_sub_ = create_subscription<vision_msgs::msg::Detection2D>("input_detection_2d", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::vision_2d_callback, this, std::placeholders::_1));
+  vision_2d_sub_.subscribe(this, "input_detection_2d");
+  //img_depth_sub_ = create_subscription<sensor_msgs::msg::Image>("input_depth", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_depth_callback, this, std::placeholders::_1));
+  img_depth_sub_.subscribe(this, "input_depth");
   img_cam_info_sub_ = create_subscription<sensor_msgs::msg::CameraInfo>("camera_info", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_cam_info_callback, this, std::placeholders::_1));
 
   vision_3d_pub_ = create_publisher<vision_msgs::msg::Detection3D>("/detection_3d", 10);
+
+  sync_ = std::make_shared<message_filters::Synchronizer<SyncPolicy>>(SyncPolicy(10), vision_2d_sub_, img_depth_sub_);
+  sync_->registerCallback(std::bind(&DetectionNode3D::sync_callback, this, std::placeholders::_1, std::placeholders::_2));
 
   tf_listener_ = std::make_shared<tf2_ros::TransformListener>(tf_buffer_);
   tf_broadcaster_ = std::make_shared<tf2_ros::TransformBroadcaster>(this);
 }
 
+void
+DetectionNode3D::sync_callback(const vision_msgs::msg::Detection2D::ConstSharedPtr & vision, const sensor_msgs::msg::Image::ConstSharedPtr & img)
+{
+  last_detection_ = vision;
+  last_depth_ = img;
+   if (!last_cam_info_) {
+     RCLCPP_WARN(this->get_logger(), "No recibidos depth o camera_info de imagen 2D");
+     return;
+   }
+   publish_vision();
+}
+
+/*
 void
 DetectionNode3D::vision_2d_callback(const vision_msgs::msg::Detection2D::ConstSharedPtr & vision)
 {
@@ -68,7 +90,7 @@ void
 DetectionNode3D::img_depth_callback(const sensor_msgs::msg::Image::ConstSharedPtr & img)
 {
   last_depth_ = img;
-}
+}*/
 
 void
 DetectionNode3D::img_cam_info_callback(const sensor_msgs::msg::CameraInfo::ConstSharedPtr & info)

@@ -86,11 +86,13 @@ DetectObstacle::laser_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr
   point_laser.point.z = 0.0;
 
   geometry_msgs::msg::PointStamped point_robot;
-  geometry_msgs::msg::TransformStamped transform;
 
   try {
     point_robot = tf_buffer_.transform(point_laser, "base_link", tf2::durationFromSec(0.1));
+
+    geometry_msgs::msg::TransformStamped transform;
     transform = tf_buffer_.lookupTransform("base_link", scan->header.frame_id, scan->header.stamp, rclcpp::Duration::from_seconds(0.1));
+
     tf2::doTransform(point_laser, point_robot, transform);
   } catch (tf2::TransformException & ex) {
     RCLCPP_WARN(this->get_logger(), "TF error: %s", ex.what());

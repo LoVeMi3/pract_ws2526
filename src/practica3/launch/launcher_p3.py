@@ -61,7 +61,7 @@ def generate_launch_description():
                         output='screen',
                         parameters=[
                           {'use_sim_time': True}
-                        ])
+                        ],
                         remappings=[
                           ('output_detection_3d', 'detection_3d')
                         ])
