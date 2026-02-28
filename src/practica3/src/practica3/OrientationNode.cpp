@@ -41,6 +41,7 @@ OrientationNode::OrientationNode()
 : Node("orientation_node"), tf_buffer_(this->get_clock()), vlin_pid_(0.0, 1.0, 0.0, 0.7), vrot_pid_(0.0, 1.0, 0.3, 1.0)
 {
   vision_3d_sub_ = create_subscription<vision_msgs::msg::Detection3D>("output_detection_3d", rclcpp::SensorDataQoS().reliable(), std::bind(&OrientationNode::vision_3d_callback, this, std::placeholders::_1));
+  obstacle_sub_ = create_subscription<geometry_msgs::msg::PointStamped>("/nearest_obstacle", rclcpp::SensorDataQoS().reliable(), std::bind(&OrientationNode::nearest_obstacle_callback, this, std::placeholders::_1));
 
   vel_publisher_ = create_publisher<geometry_msgs::msg::Twist>("/cmd_vel", 10);
   timer_ = create_wall_timer(50ms, std::bind(&OrientationNode::control_cycle, this));
@@ -65,6 +66,12 @@ OrientationNode::vision_3d_callback(const vision_msgs::msg::Detection3D::ConstSh
 }
 
 void
+OrientationNode::nearest_obstacle_callback(const geometry_msgs::msg::PointStamped::ConstSharedPtr & obstacle)
+{
+  last_obstacle_ = obstacle;
+}
+
+void
 OrientationNode::control_cycle()
 {
   tf2::Stamped<tf2::Transform> bf2target;
@@ -86,17 +93,45 @@ OrientationNode::control_cycle()
     double vel_lin = std::clamp(vlin_pid_.get_output(dist - 1.0), -1.0, 1.0);
 
     geometry_msgs::msg::Twist twist;
-
-    if (dist < 1.5) {
-      twist.linear.x = -vel_lin;
-      twist.angular.z = 0.0;
-
-      vel_publisher_->publish(twist);
-    }
+    bool obstacle_danger = false;
 
     twist.linear.x = vel_lin;
     twist.angular.z = vel_rot;
 
+    if (last_obstacle_) {
+      double obsX = last_obstacle_->point.x;
+      double obsY = last_obstacle_->point.y;
+      double obsDist = sqrt(obsX * obsX + obsY * obsY);
+
+      if (obsX > 0.0 && obsDist < 0.7) {
+        obstacle_danger = true;
+      }
+    }
+    //comprobar si hay algún obstáculo en frente del obsjetivo al que se sigue
+    if (obstacle_danger) {
+      twist.linear.x = 0.0;
+      twist.angular.z = -vel_rot;
+    } else {
+      twist.linear.x = vel_lin;
+      twist.angular.z = vel_rot;
+    }
+    //comprobar que no estamos muy cerca del obsjetico al que se sigue
+    if (dist < 1.5) {
+      twist.linear.x = -vel_lin;
+      twist.angular.z = 0.0;
+    } else {
+      twist.linear.x = vel_lin;
+      twist.angular.z = vel_rot;
+    }
+    vel_publisher_->publish(twist);
+    /*
+    if (obstáculo peligroso) {
+      modificar velocidades
+    } else {
+      twist.linear.x = vel_lin;
+      twist.angular.z = vel_rot;
+    }
+    */
     vel_publisher_->publish(twist);
 
   } else {
@@ -114,7 +149,7 @@ OrientationNode::find_vision()
 
   vel_publisher_->publish(twist);
 
-  RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 2000, "Buscando objetivo... vroom... vroom");
+  RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 2000, "Buscando objetivo, vroom... vroom...");
 }
 } //namespace practica3
 
