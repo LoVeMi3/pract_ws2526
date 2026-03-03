@@ -13,8 +13,7 @@ find_package(sensor_msgs REQUIRED)
 find_package(vision_msgs REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
-find_package(tf2_geometry_msgs REQUIRED)
-#find_package(kobuki_ros_interfaces REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)¡
 
 add_library(${PROJECT_NAME} SHARED
   src/practica3/DetectObstacle.cpp
@@ -32,7 +31,6 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   rclcpp::rclcpp
   tf2::tf2
   tf2_ros::tf2_ros
-  #kobuki_ros_interfaces::kobuki_ros_interfaces
   ${geometry_msgs_TARGETS}
   ${tf2_geometry_msgs_TARGETS}
   ${std_msgs_TARGETS}
@@ -81,7 +79,6 @@ ament_export_dependencies(
   tf2
   tf2_ros
   tf2_geometry_msgs
-  #kobuki_ros_interfaces
 )
 
 ament_package()
