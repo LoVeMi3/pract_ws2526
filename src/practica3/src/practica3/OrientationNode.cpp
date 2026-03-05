@@ -75,11 +75,15 @@ OrientationNode::control_cycle()
     double obsY = last_obstacle_->point.y;
     double obsDist = sqrt(obsX * obsX + obsY * obsY);
 
-    if (obsX > 0.0 && obsDist < 0.7) {
+    if (obsX > 0.0) {
       obstacle_danger = true;
       twist.linear.x = 0.0;
-      twist.angular.z = -(obsY > 0) ? -0.6 : 0.6; //girar al lado contrario del obstáculo
-
+      //girar al lado contrario del obstáculo
+      if (obsY > 0) {
+        twist.angula.z = -0.6;
+      } else if (obsY < 0) {
+        twist.angular.z = 0.6;
+      }
       RCLCPP_INFO_THROTTLE(get_logger(), *get_clock(), 5000, "Esquivando obstáculo, pi... pi...");
     }
   }
