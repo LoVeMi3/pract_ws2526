@@ -45,9 +45,7 @@ DetectionNode3D::DetectionNode3D()
   declare_parameter("min_distance", min_distance_);
   get_parameter("min_distance", min_distance_);
 
-  //vision_2d_sub_ = create_subscription<vision_msgs::msg::Detection2D>("input_detection_2d", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::vision_2d_callback, this, std::placeholders::_1));
   vision_2d_sub_.subscribe(this, "input_detection_2d");
-  //img_depth_sub_ = create_subscription<sensor_msgs::msg::Image>("input_depth", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_depth_callback, this, std::placeholders::_1));
   img_depth_sub_.subscribe(this, "input_depth");
   img_cam_info_sub_ = create_subscription<sensor_msgs::msg::CameraInfo>("camera_info", rclcpp::SensorDataQoS().reliable(), std::bind(&DetectionNode3D::img_cam_info_callback, this, std::placeholders::_1));
 
@@ -72,44 +70,12 @@ DetectionNode3D::sync_callback(const vision_msgs::msg::Detection2D::ConstSharedP
    publish_vision();
 }
 
-/*
-void
-DetectionNode3D::vision_2d_callback(const vision_msgs::msg::Detection2D::ConstSharedPtr & vision)
-{
-  last_detection_ = vision;
-
-  if (!last_depth_ || !last_cam_info_) {
-    RCLCPP_WARN(this->get_logger(), "No recibidos depth o camera_info de imagen 2D");
-    return;
-  }
-
-  publish_vision();
-}
-
-void
-DetectionNode3D::img_depth_callback(const sensor_msgs::msg::Image::ConstSharedPtr & img)
-{
-  last_depth_ = img;
-}*/
-
 void
 DetectionNode3D::img_cam_info_callback(const sensor_msgs::msg::CameraInfo::ConstSharedPtr & info)
 {
   last_cam_info_ = info;
 }
-/*
-Centro del bounding box 2D → (u, v)
-Profundidad en ese píxel → Z
-Intrínsecos de cámara → fx, fy, cx, cy
 
-X = (u - cx) * Z / fx
-Y = (v - cy) * Z / fy
-Z = Z
-
-K = [fx  0 cx]
-    [0  fy cy]
-    [0   0  1]
-*/
 void
 DetectionNode3D::publish_vision()
 {

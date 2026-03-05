@@ -29,14 +29,9 @@ class DetectionNode3D : public rclcpp::Node
 public:
   DetectionNode3D();
 private:
-  //void vision_2d_callback(const vision_msgs::msg::Detection2D::ConstSharedPtr & vision);
-  //void img_depth_callback(const sensor_msgs::msg::Image::ConstSharedPtr & img);
-  void img_cam_info_callback(const sensor_msgs::msg::CameraInfo::ConstSharedPtr & info);
   void sync_callback(const vision_msgs::msg::Detection2D::ConstSharedPtr & vision, const sensor_msgs::msg::Image::ConstSharedPtr & img);
+  void img_cam_info_callback(const sensor_msgs::msg::CameraInfo::ConstSharedPtr & info);
 
-
-  //rclcpp::Subscription<vision_msgs::msg::Detection2D>::SharedPtr vision_2d_sub_;
-  //rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr img_depth_sub_;
   message_filters::Subscriber<vision_msgs::msg::Detection2D> vision_2d_sub_;
   message_filters::Subscriber<sensor_msgs::msg::Image> img_depth_sub_;
   rclcpp::Subscription<sensor_msgs::msg::CameraInfo>::SharedPtr img_cam_info_sub_;
