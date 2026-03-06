@@ -1,13 +1,11 @@
-/* implementar una FSM que coordina uan tarea de patrullaje mediante la 
-   capacidad de navegación validada en el paso2 con nav2 */
+#ifndef PRACTICA4__NAV_FSM_HPP_
+#define PRACTICA4__NAV_FSM_HPP_
 
 #include <algorithm>
 #include <cmath>
 #include <limits>
 #include <memory>
 #include <random>
-
-#include "practica4/navFSM.hpp"
 
 #include "std_msgs/msg/bool.hpp"
 #include "sensor_msgs/msg/image.hpp"
@@ -36,34 +34,29 @@ using namespace std::chrono_literals;
 
 namespace practica4 {
 
-void
-navFSM::control_cycle()
+class navFSM : public rclcpp::Node
 {
-  switch (current_state_) {
-  case State:IDLE:
-    //detener motores y esperar
-    break;
-  case State::MOVING:
-    //avanzar robot
-    break;
-  case State::OBST_DETECTED:
-    //frenar porque hay un obstáculo
-    break;
-  case State::STOPPED:
-    //detener totalmente el robot
-    break;
-  default:
-    //nidea
-    break;
-  }
-}
+public:
+  enum class State { IDLE, MOVING, OBST_DETECTED, STOPPED };
+  navFSM();
+  void simulate_start_button();
+private:
+  State current_state_;
+  double min_dist_; // = 10.0
+  const double OBST_THRESHOLD= 0.5;
+  bool start_button_pressed_ = false;
+  rclcpp::Time stopped_time_;
 
-void
-navFSM::laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg)
-{
-  if(!msg->ranges.empty()) {
-    min_dist_ = *std::min_element(msg->ranges.begin(), msg->ranges.end());
-  }
-}
+  rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_;
+  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_;
 
-}
+  rclcpp::TimerBase::SharedPtr timer_;
+
+  void laser_callback(const sensor_msgs::msg::LaserScan::SharedPtr msg);
+  void control_cycle();
+  void publish_velocity(double linear, double angular);
+};
+
+} //namespace practica4
+
+#endif //PRACTICA4__NAV_FSM_HPP_
