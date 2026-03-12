@@ -37,11 +37,14 @@ namespace practica4 {
 class navFSM : public rclcpp::Node
 {
 public:
-  enum class State { IDLE, MOVING, OBST_DETECTED, STOPPED };
+  enum class State { INIT, WAIT_SERVER, SEND_GOAL, NAVIGATING, CHECK_RESULT };
   navFSM();
   void simulate_start_button();
 private:
   State current_state_;
+  std::vector<geometry_msgs::msg::PoseStamped> waypoints_;
+  int current_waypoint_;
+  int retry_count_;
   double min_dist_; // = 10.0
   const double OBST_THRESHOLD= 0.5;
   bool start_button_pressed_ = false;

@@ -15,6 +15,9 @@ find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 
+find_package(nav2_example REQUIRED)
+find_package(fsm_examples REQUIRED)
+
 add_library(${PROJECT_NAME} SHARED )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
