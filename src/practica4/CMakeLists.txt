@@ -7,32 +7,30 @@ endif()
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(rclcpp_action REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
-find_package(sensor_msgs REQUIRED)
-find_package(vision_msgs REQUIRED)
-find_package(tf2 REQUIRED)
-find_package(tf2_ros REQUIRED)
-find_package(tf2_geometry_msgs REQUIRED)
+find_package(nav2_msgs REQUIRED)
 
 find_package(nav2_example REQUIRED)
 find_package(fsm_examples REQUIRED)
 
-add_library(${PROJECT_NAME} SHARED )
+add_library(${PROJECT_NAME} SHARED
+  src/navFSM.cpp
+)
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
   rclcpp::rclcpp
-  tf2::tf2
-  tf2_ros::tf2_ros
+  rclcpp_action::rclcpp_action
+  nav2_example::nav2_example
+  fsm_examples::fsm_examples
   ${geometry_msgs_TARGETS}
-  ${tf2_geometry_msgs_TARGETS}
   ${std_msgs_TARGETS}
-  ${sensor_msgs_TARGETS}
-  ${vision_msgs_TARGETS}
+  ${nav2_msgs_TARGETS}
 )
 
-add_executable()
-target_link_libraries()
+add_executable(nav_fsm src/nav_fsm_main.cpp)
+target_link_libraries(nav_fsm ${PROJECT_NAME})
 
 install(TARGETS
   ${PROJECT_NAME}
@@ -56,13 +54,12 @@ ament_export_libraries(${PROJECT_NAME})
 ament_export_targets(export_${PROJECT_NAME})
 ament_export_dependencies(
   rclcpp
+  rclcpp_action
   std_msgs
   geometry_msgs
-  sensor_msgs
-  vision_msgs
-  tf2
-  tf2_ros
-  tf2_geometry_msgs
+  nav2_msgs
+  nav2_example
+  fsm_examples
 )
 
 ament_package()
