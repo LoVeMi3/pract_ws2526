@@ -1,5 +1,7 @@
 # PRÁCTICA 5 #
 
+ACORDARSE DE COMPILAR EL ASR Y HACER source/install/setup.bash DE ESTE
+
 ### Paso 1: preparación del entorno y capacidad de nevegación ###
 lorea@Baymax6:~$ ros2 topic list
 
