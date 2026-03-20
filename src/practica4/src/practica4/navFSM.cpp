@@ -93,12 +93,12 @@ navFSM::control_cycle()
     current_state_ = State::NAVIGATING;
     break;
   case State::NAVIGATING:
+    msg.data = "NAVIGATING";
+    state_pub_->publish(msg);
     if (!nav_client_->is_goal_done()) {
       return;
     }
     RCLCPP_INFO(get_logger(), "Waypoint actual: %d", current_waypoint_);
-    msg.data = "NAVIGATING";
-    state_pub_->publish(msg);
     current_state_ = State::CHECK_RESULT;
     break;
   case State::CHECK_RESULT:
@@ -107,7 +107,7 @@ navFSM::control_cycle()
       if (current_waypoint_ >= waypoints_.size()) {
         current_waypoint_ = 0;
       }
-      msg.data = "CHECKING RESULT";
+      msg.data = "SUCCESS";
       state_pub_->publish(msg);
       current_state_ = State::SEND_GOAL;
     } else {
@@ -117,7 +117,7 @@ navFSM::control_cycle()
       } else {
         retry_count_ = 0;
         current_waypoint_++;
-        msg.data = "CHECKING RESULT";
+        msg.data = "RETRYING";
         state_pub_->publish(msg);
         current_state_ = State::SEND_GOAL;
       }
