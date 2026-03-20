@@ -22,7 +22,15 @@ lorea@Baymax6:~$ ros2 topic list
     /tf_static
 
 _Confirmar_ _que_ _se_ _dispone_ _de_ _un_ _mapa_ _del_ _entorno_ _navegable_
+
 ros2 launch nav2_bringup navigation_launch.py map:=/practica5/map/aws_bookstore.yaml
+
+Node(
+package='nav2_map_server',
+executable='map_server',
+name='map_server',
+parameters=[{'yaml_filename': '/ruta/a/map.yaml'}]
+)
 
 _3._ y _4._ creo que tendré que hacerlos en el lab porque no tengo Nav2 y no lo
 voy a descargar ahora. Prefiero ponerme a organizar los nodos y tal.
