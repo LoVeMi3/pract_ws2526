@@ -1,1 +1,44 @@
-//diseñar bejaviour tree
+<?xml version="1.0" encoding="UTF-8"?>
+<root BTCPP_format="4"
+      main_tree_to_execute="WaiterBT">
+    <BehaviorTree ID="WaiterBT">
+        <Sequence name="WaiterBTSequence">
+            <SayTextClient text="Buenas, ¿Qué quiere beber?"/>
+            <ListenTextClient recognized_text="{order}"/>
+            <ExtractInfoClient interest="bebida"
+                               full_text="{order}"
+                               extracted_info="{drink_order}"/>
+            <SayTextClient text="Lo que quiere beber es {drink_order}. Perfecto."/>
+            <SayTextClient text="Voy a por su pedido."/>
+            <GoToPose goal="kitchen"/>
+            <SayTextClient text="Recogiendo pedido."/>
+            <GoToPose goal="client"/>
+            <SayTextClient text="Aquí tiene su pedido."/>
+        </Sequence>
+    </BehaviorTree>
+
+    <!-- Description of Node Models (used by Groot) -->
+    <Action>
+        <Action ID="ExtractInfoClient"
+                editable="true">
+            <input_port name="interest"/>
+            <input_port name="full_text"/>
+            <output_port name="extracted_info"/>
+        </Action>
+        <Action ID="ListenTextClient"
+                editable="true">
+            <output_port name="recognized_text"/>
+        </Action>
+        <Action ID="SayTextClient"
+                editable="true">
+            <input_port name="text"/>
+        </Action>
+        <Action ID="DetectionNode"
+                editable="true">
+        </Action>
+        <Action ID = "GoToPose"
+                editable="true"/>
+        </Action>
+    </TreeNodesModel>
+
+</root>

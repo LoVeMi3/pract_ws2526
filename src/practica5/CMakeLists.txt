@@ -17,7 +17,8 @@ find_package(nav2_example REQUIRED)
 find_package(fsm_examples REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED
-  src/navFSM.cpp
+  src/DetectionNode.cpp
+  src/WaiterBT.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
@@ -31,8 +32,11 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   ${nav2_msgs_TARGETS}
 )
 
-add_executable(nav_fsm src/nav_fsm_main.cpp)
-target_link_libraries(nav_fsm ${PROJECT_NAME})
+add_executable(detection src/detection_node_main.cpp)
+target_link_libraries(detection ${PROJECT_NAME})
+
+add_executable(waiter src/waiter_bt_main.cpp)
+target_link_libraries(waiter ${PROJECT_NAME})
 
 install(TARGETS
   ${PROJECT_NAME}
