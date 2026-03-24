@@ -41,3 +41,8 @@ voy a descargar ahora. Prefiero ponerme a organizar los nodos y tal.
 
 ### Paso 3: behaviour tree completo de la misión
 Único Behaviour Tree
+
+
+ros2 launch simple_hri free_simple_hri.launch.py
+
+ros2 run hri_examples simple_hri_app
