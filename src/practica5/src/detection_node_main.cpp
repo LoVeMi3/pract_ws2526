@@ -1,5 +1,6 @@
 //main del nodo DetectionNode.cpp
 #include <memory>
+#include <string>
 
 #include "practica5/DetectionNode.hpp"
 #include "rclcpp/rclcpp.hpp"

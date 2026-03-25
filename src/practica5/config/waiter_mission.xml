@@ -38,7 +38,6 @@
         </Action>
         <Action ID = "GoToPose"
                 editable="true"/>
-        </Action>
-    </TreeNodesModel>
+    </Action>
 
 </root>

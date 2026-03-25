@@ -1,5 +1,6 @@
 //main del nodo WaiterBT.cpp
 #include <memory>
+#include <string>
 
 #include "practica5/WaiterBT.hpp"
 #include "rclcpp/rclcpp.hpp"

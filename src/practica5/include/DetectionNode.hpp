@@ -4,12 +4,13 @@
 #define PRACTICA5__DETECTION_NODE_HPP_
 
 #include <memory>
+#include <string>
 
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_msgs/msg/bool.hpp"
 #include "rclcpp/rclcpp.hpp"
 
-namespace practica3 {
+namespace practica5 {
 
 class DetectionNode : public rclcpp::Node
 {
@@ -19,7 +20,7 @@ private:
   void laser_callback(const sensor_msgs::msg::LaserScan::ConstSharedPtr & scan);
 
   rclcpp::Subscription<sensor_msgs::msg::LaserScan>::SharedPtr laser_sub_;
-  rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr obstacle_pub_;
+  rclcpp::Publisher<std_msgs::msg::Bool>::SharedPtr person_pub_;
 
   float min_distance_ {0.5f};
 };

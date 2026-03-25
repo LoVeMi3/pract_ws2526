@@ -5,6 +5,7 @@
 #include <limits>
 #include <memory>
 #include <random>
+#include <string>
 
 #include "practica5/DetectionNode.hpp"
 
