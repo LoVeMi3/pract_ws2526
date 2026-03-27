@@ -35,8 +35,8 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
 add_executable(detection src/detection_node_main.cpp)
 target_link_libraries(detection ${PROJECT_NAME})
 
-add_executable(waiter src/waiter_bt_main.cpp)
-target_link_libraries(waiter ${PROJECT_NAME})
+add_executable(waiter_bt src/waiter_bt_main.cpp)
+target_link_libraries(waiter_bt ${PROJECT_NAME})
 
 install(TARGETS
   ${PROJECT_NAME}

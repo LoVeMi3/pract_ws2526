@@ -7,6 +7,9 @@
 #include <random>
 #include <string>
 
+#include "practica5/WaiterBT.hpp"
+#include "practica5/GoToPoseAction.hpp"
+#include "practica5/WaitForPersonAction.hpp"
 #include "practica5/DetectionNode.hpp"
 
 #include "sensor_msgs/msg/laser_scan.hpp"

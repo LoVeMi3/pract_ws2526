@@ -10,6 +10,10 @@
 #include "std_msgs/msg/bool.hpp"
 #include "rclcpp/rclcpp.hpp"
 
+#include "practica5/WaiterBT.hpp"
+#include "practica5/GoToPoseAction.hpp"
+#include "practica5/WaitForPersonAction.hpp"
+
 namespace practica5 {
 
 class DetectionNode : public rclcpp::Node

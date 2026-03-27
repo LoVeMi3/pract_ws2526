@@ -11,7 +11,22 @@ int main(int argc, char * argv[])
 
   auto waiter_bt = std::make_shared<practica5::WaiterBT>();
 
-  rclcpp::spin(waiter_bt);
+  rclcpp::Rate rate(10); //10hz
+
+  while (rclcpp::ok()) {
+    BT::NodeStatus status = waiter_bt->tick();
+
+    if (status == T::NodeStatus::SUCCESS) {
+      RCLCPP_INFO(waiter_bt->get_logger(), "Mission completed successfully");
+      break;
+    } else if (status == T::NodeStatus::FAILURE) {
+      RCLCPP_ERROR(waiter_bt->get_logger(), "Mission failed");
+      break;
+    }
+    //si no es ninguno de los dos estados, estamos RUNNING, seguimos con los ticks
+    rclcpp::spin_some(waiter_bt)
+    rate.sleep();
+  }
 
   rclcpp::shutdown();
   return 0;

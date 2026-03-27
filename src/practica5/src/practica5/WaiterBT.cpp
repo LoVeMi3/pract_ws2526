@@ -7,18 +7,73 @@
 #include <random>
 #include <string>
 
-#include <behaviortree_cpp/bt_factory.h>
-#include <behaviortree_cpp/loggers/bt_cout_logger.h>
-#include <ament_index_cpp/get_package_share_directory.hpp>
+#include "behaviortree_cpp/bt_factory.h"
+#include "behaviortree_cpp/behavior_tree.h"
+#include "behaviortree_cpp/loggers/bt_cout_logger.h"
+#include "ament_index_cpp/get_package_share_directory.hpp"
 
+#include "rclcpp/rclcpp.hpp"
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_msgs/msg/bool.hpp"
 
-#include "WaiterBT.hpp"
+#include "hri_client/hri_client.hpp"
 #include "bt_examples/bt_nodes/SayTextClientAction.hpp"
 #include "bt_examples/bt_nodes/ListenTextClientAction.hpp"
 #include "bt_examples/bt_nodes/ExtractInfoClientAction.hpp"
-
-#include "hri_client/hri_client.hpp"
 #include "bt_examples/bt_nodes/bt_node_registration.hpp"
 
+#include "practica5/WaiterBT.hpp"
+#include "practica5/GoToPoseAction.hpp"
+#include "practica5/WaitForPersonAction.hpp"
+#include "practica5/DetectionNode.hpp"
+
+// executable='waiter_bt' VERYIMPORTANT
+
+using namespace std::chrono_literals;
+
+namespace practica5 {
+
+WaiterBT::WaiterBT()
+: Node("waiter_bt")
+{
+  blackboard_ = BT::Blackboard::create();
+  blackboard_->set("node", std::shared_ptr<rclcpp::Node>(this, [](auto *) {}));
+
+  hri_client_ = std::make_shared<bt_examples::hri_client::HRIClient>(shared_from_this());
+  blackboard_->set("hri_client", hri_client_);
+
+}
+
+void
+WaiterBT::register_nodes()
+{
+  factory_.registerNodeType<SayTextClientAction>("SayTextClient");
+  factory_.registerNodeType<ListenTextClientAction>("ListenTextClient");
+  factory_.registerNodeType<ExtractInfoClientAction>("ExtractInfoClient");
+
+  factory_.registerNodeType<GoToPoseAction>("GoToPose");
+  factory_.registerNodeType<WaitForPerson>("WaitForPerson");
+}
+
+void
+WaiterBT::create_tree()
+{
+  std::string xml_path = ament_index_cpp::get_package_share_directory("practica5") + "/config/waiter_mission.xml";
+  RCLCPP_INFO(gt_logger(), "Loading BT from: %s", xml_path.c_str());
+
+  tree_ = factory_.createTreeFromFile(xml_path, blackboard_);
+}
+
+BT::NodeStatus
+WaiterBT::Tick()
+{
+  return tree_.tickOnce();
+}
+
+bool
+WaiterBT::isRunning() const
+{
+  return tree_.rootNode()->status() == BT::NodeStatus::RUNNING;
+}
+
+} //namespace practica5
