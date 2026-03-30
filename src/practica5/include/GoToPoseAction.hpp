@@ -50,18 +50,18 @@ private:
   rclcpp::Node::SharedPtr node_;
   rclcpp_action::Client<NavigateToPose>::SharedPtr nav_client_;
 
-  std::shared_future<GoalHandleNav>::SharedPtr goal_handle_future_;
+  std::shared_future<GoalHandleNav::SharedPtr> goal_handle_future_;
   GoalHandleNav::SharedPtr goal_handle_;
   bool goal_sent_{false};
 
-  //sustituir con las coordenadas reales de los luagres
+  //sustituir con las coordenadas reales de los lugares
   std::map<std::string, std::array<double, 3>> waypoints_ = {
     {"kitchen", {0.0, 0.0, 1.0}},
-    {"client", {1.0, 0.0, 0.0}},
-    {"home", {0.0, 1.0, 0.0}}
+    {"client", {0.0, 0.0, 1.0}},
+    {"home", {0.0, 0.0, 1.0}}
   };
 };
 
 } // namespace practica5
 
-##endif //PRACTICA5__GO_TO_POSE_ACTION_HPP
+#endif //PRACTICA5__GO_TO_POSE_ACTION_HPP

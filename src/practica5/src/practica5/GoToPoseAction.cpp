@@ -24,12 +24,14 @@
 #include "practica5/WaitForPersonAction.hpp"
 #include "practica5/DetectionNode.hpp"
 
+// executable='go_to_pose' VERYIMPORTANT
+
 using namespace std::chrono_literals;
 
 namespace practica5 {
 
 GoToPoseAction::GoToPoseAction (
-  const std::string &name, const BT:NodeConfig &config)
+  const std::string &name, const BT::NodeConfig &config)
 : BT::StatefulActionNode(name, config)
 {
   if (!config.blackboard->get("node", node_)) {
@@ -59,14 +61,15 @@ GoToPoseAction::onStart()
     return BT::NodeStatus::FAILURE;
   }
 
-  auto &coords = there->second; //x, y, w
+  auto &coords = there->second; //x, y, w (cuaterniones)
   NavigateToPose::Goal goal_msg;
 
   goal_msg.pose.header.frame_id = "map";
   goal_msg.pose.header.stamp = node_->get_clock()->now();
   goal_msg.pose.pose.position.x = coords[0];
   goal_msg.pose.pose.position.y = coords[1];
-  goal_msg.pose.pose.position.w = coords[2];
+  goal_msg.pose.pose.orientation.w = coords[2];
+  goal_msg.pose.pose.orientation.z = 0.0;
 
   RCLCPP_INFO(node_->get_logger(), "GoToPoseAction: navigating to '%s' (%.2f, %.2f)", goal_name.c_str(), coords[0], coords[1]);
 
@@ -87,8 +90,8 @@ GoToPoseAction::onRunning()
     if (goal_handle_future_.wait_for(0ms) == std::future_status::ready) {
       goal_handle_ = goal_handle_future_.get();
       if (!goal_handle_) {
-        RCLCPP_ERROR(node->get_logger(), "GoToPoseAction: goal was rejected");
-        return BT::NodeStaus::FAILURE;
+        RCLCPP_ERROR(node_->get_logger(), "GoToPoseAction: goal was rejected");
+        return BT::NodeStatus::FAILURE;
       }
     }
     return BT::NodeStatus::RUNNING;

@@ -16,15 +16,15 @@ int main(int argc, char * argv[])
   while (rclcpp::ok()) {
     BT::NodeStatus status = waiter_bt->tick();
 
-    if (status == T::NodeStatus::SUCCESS) {
+    if (status == BT::NodeStatus::SUCCESS) {
       RCLCPP_INFO(waiter_bt->get_logger(), "Mission completed successfully");
       break;
-    } else if (status == T::NodeStatus::FAILURE) {
+    } else if (status == BT::NodeStatus::FAILURE) {
       RCLCPP_ERROR(waiter_bt->get_logger(), "Mission failed");
       break;
     }
     //si no es ninguno de los dos estados, estamos RUNNING, seguimos con los ticks
-    rclcpp::spin_some(waiter_bt)
+    rclcpp::spin_some(waiter_bt);
     rate.sleep();
   }
 

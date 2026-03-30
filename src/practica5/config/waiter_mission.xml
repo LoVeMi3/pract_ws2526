@@ -3,6 +3,7 @@
       main_tree_to_execute="WaiterBT">
     <BehaviorTree ID="WaiterBT">
         <Sequence name="WaiterBTSequence">
+            <WaitForPersonAction/>
             <SayTextClient text="Buenas, ¿Qué quiere beber?"/>
             <ListenTextClient recognized_text="{order}"/>
             <ExtractInfoClient interest="bebida"
@@ -18,7 +19,7 @@
     </BehaviorTree>
 
     <!-- Description of Node Models (used by Groot) -->
-    <Action>
+    <TreeNodesModel>
         <Action ID="ExtractInfoClient"
                 editable="true">
             <input_port name="interest"/>
@@ -29,15 +30,13 @@
                 editable="true">
             <output_port name="recognized_text"/>
         </Action>
-        <Action ID="SayTextClient"
-                editable="true">
+        <Action ID="SayTextClient">
             <input_port name="text"/>
         </Action>
-        <Action ID="DetectionNode"
-                editable="true">
+        <Action ID = "GoToPose">
+                <input_port name="goal"/>
         </Action>
-        <Action ID = "GoToPose"
-                editable="true"/>
-    </Action>
+        <Action ID="WaitForPersonAction"/>
+    </TreeNodesModel>
 
 </root>

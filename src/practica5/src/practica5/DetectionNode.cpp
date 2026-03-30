@@ -7,14 +7,8 @@
 #include <random>
 #include <string>
 
-#include "practica5/WaiterBT.hpp"
-#include "practica5/GoToPoseAction.hpp"
-#include "practica5/WaitForPersonAction.hpp"
-#include "practica5/DetectionNode.hpp"
-
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "std_msgs/msg/bool.hpp"
-
 #include "rclcpp/rclcpp.hpp"
 
 // executable='detection' VERYIMPORTANT
@@ -24,7 +18,7 @@ using namespace std::chrono_literals;
 namespace practica5 {
 
 DetectionNode::DetectionNode()
-: Node("detection_node"), tf_buffer_(this->get_clock())
+: Node("detection_node")
 {
   declare_parameter("min_distance", min_distance_);
   get_parameter("min_distance", min_distance_);

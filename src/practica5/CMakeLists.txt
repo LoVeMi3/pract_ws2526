@@ -6,19 +6,25 @@ if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
 endif()
 
 find_package(ament_cmake REQUIRED)
+find_package(ament_index_cpp REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_action REQUIRED)
+
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav2_msgs REQUIRED)
-find_package(bt_examples REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
+find_package(bt_examples REQUIRED)
 find_package(nav2_example REQUIRED)
 find_package(fsm_examples REQUIRED)
+find_package(behaviortree_cpp REQUIRED)
+find_package(hri_client REQUIRED)
 
 add_library(${PROJECT_NAME} SHARED
-  src/DetectionNode.cpp
-  src/WaiterBT.cpp
+  src/practica5/DetectionNode.cpp
+  src/practica5/WaiterBT.cpp
+  src/practica5/GoToPoseAction.cpp
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
@@ -27,9 +33,12 @@ target_link_libraries(${PROJECT_NAME} PUBLIC
   nav2_example::nav2_example
   fsm_examples::fsm_examples
   bt_examples::bt_examples
+  behaviortree_cpp::behaviortree_cpp
+  hri_client::hri_client
   ${geometry_msgs_TARGETS}
   ${std_msgs_TARGETS}
   ${nav2_msgs_TARGETS}
+  ${sensor_msgs_TARGETS}
 )
 
 add_executable(detection src/detection_node_main.cpp)
@@ -64,9 +73,12 @@ ament_export_dependencies(
   std_msgs
   geometry_msgs
   nav2_msgs
+  sensor_msgs
   nav2_example
   fsm_examples
   bt_examples
+  behaviortree_cpp
+  hri_client
 )
 
 ament_package()

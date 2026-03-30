@@ -1,9 +1,17 @@
 # PRÁCTICA 5 #
 
 ACORDARSE DE COMPILAR EL ASR Y HACER source/install/setup.bash DE ESTE
+
 Actualizar CMakeLists.txt
+
 Añadir GoToPoseAction.cpp y WaiterBT.cpp a las fuentes del ejecutable waiter, 
 y añadir nav2_msgs y rclcpp_action como dependencias.
+
+
+[detection] nodo ROS  →  publica /person_detected (Bool)
+
+[waiter_bt] nodo ROS  →  WaitForPerson suscribe a /person_detected
+
 
 ### Paso 1: preparación del entorno y capacidad de nevegación ###
 lorea@Baymax6:~$ ros2 topic list

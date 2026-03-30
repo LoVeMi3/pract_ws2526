@@ -39,9 +39,11 @@ WaiterBT::WaiterBT()
   blackboard_ = BT::Blackboard::create();
   blackboard_->set("node", std::shared_ptr<rclcpp::Node>(this, [](auto *) {}));
 
-  hri_client_ = std::make_shared<bt_examples::hri_client::HRIClient>(shared_from_this());
+  hri_client_ = std::make_shared<hri_client::HRIClient>(shared_from_this());
   blackboard_->set("hri_client", hri_client_);
 
+  register_nodes();
+  create_tree();
 }
 
 void
@@ -59,13 +61,13 @@ void
 WaiterBT::create_tree()
 {
   std::string xml_path = ament_index_cpp::get_package_share_directory("practica5") + "/config/waiter_mission.xml";
-  RCLCPP_INFO(gt_logger(), "Loading BT from: %s", xml_path.c_str());
+  RCLCPP_INFO(get_logger(), "Loading BT from: %s", xml_path.c_str());
 
   tree_ = factory_.createTreeFromFile(xml_path, blackboard_);
 }
 
 BT::NodeStatus
-WaiterBT::Tick()
+WaiterBT::tick()
 {
   return tree_.tickOnce();
 }

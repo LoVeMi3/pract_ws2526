@@ -29,22 +29,20 @@
 
 namespace practica5 {
 
-class WaiterBt : public rclcpp::Node
+class WaiterBT : public rclcpp::Node
 {
 public:
-  WaiterBt();
+  WaiterBT();
   BT::NodeStatus tick(); //el tick de un estado al otro en el tree
 
   bool isRunning() const; //tree running
 
 private:
-  rclcpp::Node* node_;
-
-  BT::BehaviourTreeFactory factory_;
+  BT::BehaviorTreeFactory factory_;
   BT::Tree tree_;
   BT::Blackboard::Ptr blackboard_;
 
-  rclcpp::Client<bt_examples::hri_client::HRIClient>::SharedPtr hri_client_;
+  rclcpp::shared_ptr<hri_client::HRIClient> hri_client_;
   //estos cliente de aquí abajo se crean en el hri_client.hpp y .cpp, nodo de los profes
   //rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr stt_client_;
   //rclcpp::Client<bt_examples::bt_nodes::SayTextClientAction>::SharedPtr stt_client_;
