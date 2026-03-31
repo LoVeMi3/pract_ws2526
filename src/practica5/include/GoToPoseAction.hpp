@@ -39,7 +39,9 @@ public:
   static
   BT::PortsList providedPorts()
   {
-    return {BT::InputPort<std::string>("goal")};
+    return {
+      BT::InputPort<std::string>("goal"),
+      BT::InputPort<geometry_msgs::msg::PoseStamped>("client_pose")};
   }
 
   BT::NodeStatus onStart() override;
@@ -56,9 +58,9 @@ private:
 
   //sustituir con las coordenadas reales de los lugares
   std::map<std::string, std::array<double, 3>> waypoints_ = {
-    {"kitchen", {0.0, 0.0, 1.0}},
-    {"client", {0.0, 0.0, 1.0}},
-    {"home", {0.0, 0.0, 1.0}}
+    {"kitchen", {-8.4, -3.6, 4.3}},
+    {"client", {0.0, 0.0, 1.0}}, //debería coger las coordenadas a partir de la detección con el láser
+    {"home", {-5.4, 0.0, 1.0}}
   };
 };
 

@@ -26,6 +26,7 @@
 #include "practica5/GoToPoseAction.hpp"
 #include "practica5/WaitForPersonAction.hpp"
 #include "practica5/DetectionNode.hpp"
+#include "practica5/GetClientPoseAction.hpp"
 
 // executable='waiter_bt' VERYIMPORTANT
 
@@ -55,6 +56,7 @@ WaiterBT::register_nodes()
 
   factory_.registerNodeType<GoToPoseAction>("GoToPose");
   factory_.registerNodeType<WaitForPerson>("WaitForPerson");
+  factory_.registerNodeType<GetClientPoseAction>("GetClientPoseAction");
 }
 
 void

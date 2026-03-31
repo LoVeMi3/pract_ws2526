@@ -61,14 +61,30 @@ GoToPoseAction::onStart()
     return BT::NodeStatus::FAILURE;
   }
 
-  auto &coords = there->second; //x, y, w (cuaterniones)
   NavigateToPose::Goal goal_msg;
-
   goal_msg.pose.header.frame_id = "map";
   goal_msg.pose.header.stamp = node_->get_clock()->now();
-  goal_msg.pose.pose.position.x = coords[0];
-  goal_msg.pose.pose.position.y = coords[1];
-  goal_msg.pose.pose.orientation.w = coords[2];
+
+  if (goal_name == "client") {
+    geometry_msgs::msg::PoseStamped dynamic_pose;
+    if (getInput("client_pose", dynamic_pose)) {
+      goal_msg.pose.pose = dynamic_pose.pose;
+      RCLCPP_INFO(node_->get_logger(), "GoToPoseAction: usando pose dinámica del cliente (%.2f, %.2f)", dynamic_pose.pose.position.x, dynamic_pose.pose.position.y);
+    } else {
+      auto &coords = there->second; //x, y, w (cuaterniones)
+      goal_msg.pose.pose.position.x = coords[0];
+      goal_msg.pose.pose.position.y = coords[1];
+      goal_msg.pose.pose.orientation.w = coords[2];
+
+      RCLCPP_WARN(node_->get_logger(), "GoToPoseAction: sin pose dinámica, usando coordenada estática del cliente");
+    }
+  } else {
+    auto &coords = there->second; //x, y, w (cuaterniones)
+    goal_msg.pose.pose.position.x = coords[0];
+    goal_msg.pose.pose.position.y = coords[1];
+    goal_msg.pose.pose.orientation.w = coords[2];
+  }
+
   goal_msg.pose.pose.orientation.z = 0.0;
 
   RCLCPP_INFO(node_->get_logger(), "GoToPoseAction: navigating to '%s' (%.2f, %.2f)", goal_name.c_str(), coords[0], coords[1]);

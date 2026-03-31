@@ -4,6 +4,7 @@
     <BehaviorTree ID="WaiterBT">
         <Sequence name="WaiterBTSequence">
             <WaitForPersonAction/>
+            <GetClientPoseAction client_pose="{client_pose}"/>
             <SayTextClient text="Buenas, ¿Qué quiere beber?"/>
             <ListenTextClient recognized_text="{order}"/>
             <ExtractInfoClient interest="bebida"
@@ -13,7 +14,7 @@
             <SayTextClient text="Voy a por su pedido."/>
             <GoToPose goal="kitchen"/>
             <SayTextClient text="Recogiendo pedido."/>
-            <GoToPose goal="client"/>
+            <GoToPose goal="client" client_pose="{client_pose}"/>
             <SayTextClient text="Aquí tiene su pedido."/>
         </Sequence>
     </BehaviorTree>

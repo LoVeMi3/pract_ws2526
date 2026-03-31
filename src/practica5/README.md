@@ -19,8 +19,8 @@ y añadir nav2_msgs y rclcpp_action como dependencias.
    Cómo obtener las coordenadas correctas con RViz2:
 
 Lanza el simulador + Nav2 con tu mapa
-En RViz2, usa el botón "2D Pose Estimate" para establecer la pose inicial
-Mueve el robot manualmente con Nav2 o teleop hasta la zona de cocina
+En RViz2, usa el botón "2D Pose Estimate" para establecer la pose inicial     Angle: -0.00580479 ; -5.41 ; 0.0
+Mueve el robot manualmente con Nav2 o teleop hasta la zona de cocina          Angle: 4.36921 ; -8.41 ; -3.56
 En una terminal aparte:
 
 bashros2 topic echo /amcl_pose --once
@@ -61,6 +61,7 @@ lorea@Baymax6:~$ ros2 topic list
 _Confirmar_ _que_ _se_ _dispone_ _de_ _un_ _mapa_ _del_ _entorno_ _navegable_
 
 ros2 launch nav2_bringup navigation_launch.py map:=/practica5/map/aws_bookstore.yaml
+ros2 launch kobuki simulation.launch.py
 
 Node(
 package='nav2_map_server',
