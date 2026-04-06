@@ -31,11 +31,15 @@ add_library(${PROJECT_NAME} SHARED
   src/practica5/GoToPoseAction.cpp
 )
 
+set(BT_EXAMPLES_INCLUDE
+  "/home/lorea/Documents/25-26/Arqui_Soft_Robots/ros2_ws2526/src/ASR-Software/ch6_examples/bt_examples/include"
+)
+
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<BUILD_INTERFACE:${BT_EXAMPLES_INCLUDE}>
   $<INSTALL_INTERFACE:include>
   ${CMAKE_INSTALL_PREFIX}/../bt_examples/include
-  ${CMAKE_CURRENT_SOURCE_DIR}/../../ASR-Software/ch6_examples/bt_examples/include
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC
