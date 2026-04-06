@@ -16,8 +16,8 @@
     <depend>nav2_msgs</depend>
     <depend>sensor_msgs</depend>
     <exec_depend>nav2_example</exec_depend>
-    <depend>fsm_examples</depend>
-    <depend>bt_examples</depend>
+    <exec_depend>fsm_examples</exec_depend>
+    <exec_depend>bt_examples</exec_depend>
     <depend>behaviortree_cpp</depend>
     <depend>hri_client</depend>
 

@@ -15,10 +15,13 @@ find_package(geometry_msgs REQUIRED)
 find_package(nav2_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
-find_package(bt_examples REQUIRED)
-find_package(fsm_examples REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
-find_package(hri_client REQUIRED)
+find_package(hri_client REQUIRED) #hri_nodes
+
+find_library(BT_NODES_LIB bt_nodes
+  PATHS "${CMAKE_INSTALL_PREFIX}/../bt_examples/lib"
+  NO_DEFAULT_PATH REQUIRED
+)
 
 add_library(${PROJECT_NAME} SHARED
   src/practica5/DetectionNode.cpp
@@ -29,10 +32,9 @@ add_library(${PROJECT_NAME} SHARED
 target_link_libraries(${PROJECT_NAME} PUBLIC
   rclcpp::rclcpp
   rclcpp_action::rclcpp_action
-  fsm_examples::fsm_examples
-  bt_examples::bt_examples
   behaviortree_cpp::behaviortree_cpp
   hri_client::hri_client
+  ${BT_NODES_LIB}
   ${geometry_msgs_TARGETS}
   ${std_msgs_TARGETS}
   ${nav2_msgs_TARGETS}
@@ -72,8 +74,6 @@ ament_export_dependencies(
   geometry_msgs
   nav2_msgs
   sensor_msgs
-  fsm_examples
-  bt_examples
   behaviortree_cpp
   hri_client
 )
