@@ -35,6 +35,7 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
   ${CMAKE_INSTALL_PREFIX}/../bt_examples/include
+  ${CMAKE_CURRENT_SOURCE_DIR}/../../ASR-Software/ch6_examples/bt_examples/include
 )
 
 target_link_libraries(${PROJECT_NAME} PUBLIC

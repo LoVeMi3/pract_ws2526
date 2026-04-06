@@ -17,10 +17,14 @@
 #include "std_msgs/msg/bool.hpp"
 
 #include "hri_client/hri_client.hpp"
-#include "bt_examples/bt_nodes/SayTextClientAction.hpp"
-#include "bt_examples/bt_nodes/ListenTextClientAction.hpp"
-#include "bt_examples/bt_nodes/ExtractInfoClientAction.hpp"
+#include "bt_examples/bt_nodes/say_text_client_action.hpp"
+#include "bt_examples/bt_nodes/listen_text_client_action.hpp"
+#include "bt_examples/bt_nodes/extract_info_client_action.hpp"
 #include "bt_examples/bt_nodes/bt_node_registration.hpp"
+//#include "bt_examples/bt_nodes/SayTextClientAction.hpp"
+//#include "bt_examples/bt_nodes/ListenTextClientAction.hpp"
+//#include "bt_examples/bt_nodes/ExtractInfoClientAction.hpp"
+//#include "bt_examples/bt_nodes/bt_node_registration.hpp"
 
 #include "practica5/WaiterBT.hpp"
 #include "practica5/GoToPoseAction.hpp"
