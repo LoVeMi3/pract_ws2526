@@ -14,6 +14,8 @@ find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav2_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 
 find_package(behaviortree_cpp REQUIRED)
 find_package(hri_client REQUIRED) #hri_nodes
@@ -29,16 +31,25 @@ add_library(${PROJECT_NAME} SHARED
   src/practica5/GoToPoseAction.cpp
 )
 
+target_include_directories(${PROJECT_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+  ${CMAKE_INSTALL_PREFIX}/../bt_examples/include
+)
+
 target_link_libraries(${PROJECT_NAME} PUBLIC
+  ament_index_cpp::ament_index_cpp
   rclcpp::rclcpp
   rclcpp_action::rclcpp_action
   behaviortree_cpp::behaviortree_cpp
   hri_client::hri_client
+  tf2_ros::tf2_ros
   ${BT_NODES_LIB}
   ${geometry_msgs_TARGETS}
   ${std_msgs_TARGETS}
   ${nav2_msgs_TARGETS}
   ${sensor_msgs_TARGETS}
+  ${tf2_geometry_msgs_TARGETS}
 )
 
 add_executable(detection src/detection_node_main.cpp)
@@ -76,6 +87,8 @@ ament_export_dependencies(
   sensor_msgs
   behaviortree_cpp
   hri_client
+  tf2_ros
+  tf2_geometry_msgs
 )
 
 ament_package()
