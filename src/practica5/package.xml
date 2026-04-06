@@ -15,7 +15,7 @@
     <depend>geometry_msgs</depend>
     <depend>nav2_msgs</depend>
     <depend>sensor_msgs</depend>
-    <depend>nav2_example</depend>
+    <exec_depend>nav2_example</exec_depend>
     <depend>fsm_examples</depend>
     <depend>bt_examples</depend>
     <depend>behaviortree_cpp</depend>

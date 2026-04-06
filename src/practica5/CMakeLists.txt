@@ -16,7 +16,6 @@ find_package(nav2_msgs REQUIRED)
 find_package(sensor_msgs REQUIRED)
 
 find_package(bt_examples REQUIRED)
-find_package(nav2_example REQUIRED)
 find_package(fsm_examples REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
 find_package(hri_client REQUIRED)
@@ -30,7 +29,6 @@ add_library(${PROJECT_NAME} SHARED
 target_link_libraries(${PROJECT_NAME} PUBLIC
   rclcpp::rclcpp
   rclcpp_action::rclcpp_action
-  nav2_example::nav2_example
   fsm_examples::fsm_examples
   bt_examples::bt_examples
   behaviortree_cpp::behaviortree_cpp
@@ -74,7 +72,6 @@ ament_export_dependencies(
   geometry_msgs
   nav2_msgs
   sensor_msgs
-  nav2_example
   fsm_examples
   bt_examples
   behaviortree_cpp
