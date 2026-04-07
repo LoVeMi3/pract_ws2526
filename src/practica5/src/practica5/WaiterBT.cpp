@@ -44,7 +44,7 @@ WaiterBT::WaiterBT()
   blackboard_ = BT::Blackboard::create();
   blackboard_->set("node", std::shared_ptr<rclcpp::Node>(this, [](auto *) {}));
 
-  hri_client_ = std::make_shared<hri_client::HRIClient>(shared_from_this());
+  hri_client_ = std::make_shared<HRIClient::HRIClient>(shared_from_this());
   blackboard_->set("hri_client", hri_client_);
 
   register_nodes();
@@ -59,7 +59,7 @@ WaiterBT::register_nodes()
   factory_.registerNodeType<ExtractInfoClientAction>("ExtractInfoClient");
 
   factory_.registerNodeType<GoToPoseAction>("GoToPose");
-  factory_.registerNodeType<WaitForPerson>("WaitForPerson");
+  factory_.registerNodeType<WaitForPersonAction>("WaitForPerson");
   factory_.registerNodeType<GetClientPoseAction>("GetClientPoseAction");
 }
 

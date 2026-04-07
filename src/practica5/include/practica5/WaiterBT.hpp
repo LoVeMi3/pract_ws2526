@@ -46,7 +46,7 @@ private:
   BT::Tree tree_;
   BT::Blackboard::Ptr blackboard_;
 
-  rclcpp::shared_ptr<hri_client::HRIClient> hri_client_;
+  rclcpp::shared_ptr<HRIClient::HRIClient> hri_client_;
   //estos cliente de aquí abajo se crean en el hri_client.hpp y .cpp, nodo de los profes
   //rclcpp::Client<std_srvs::srv::SetBool>::SharedPtr stt_client_;
   //rclcpp::Client<bt_examples::bt_nodes::SayTextClientAction>::SharedPtr stt_client_;
