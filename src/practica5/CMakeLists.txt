@@ -21,7 +21,7 @@ find_package(behaviortree_cpp REQUIRED)
 find_package(hri_client REQUIRED) #hri_nodes
 
 find_library(BT_NODES_LIB bt_nodes
-  PATHS "${CMAKE_INSTALL_PREFIX}/../bt_examples/lib"
+  PATHS "${WS_ROOT}/install/bt_examples/lib"
   NO_DEFAULT_PATH REQUIRED
 )
 
@@ -31,9 +31,8 @@ add_library(${PROJECT_NAME} SHARED
   src/practica5/GoToPoseAction.cpp
 )
 
-set(BT_EXAMPLES_INCLUDE
-  "/home/lorea/Documents/25-26/Arqui_Soft_Robots/ros2_ws2526/src/ASR-Software/ch6_examples/bt_examples/include"
-)
+get_filename_component(WS_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../../.." ABSOLUTE)
+set(BT_EXAMPLES_INCLUDE "${WS_ROOT}/src/ASR-Software/ch6_examples/bt_examples/include")
 
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
