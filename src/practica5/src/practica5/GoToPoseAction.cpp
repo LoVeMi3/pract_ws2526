@@ -31,6 +31,12 @@ using namespace std::chrono_literals;
 
 namespace practica5 {
 
+const std::map<std::string, std::array<double, 3>> GoToPoseAction::waypoints_ = {
+  {"kitchen",  {2.0,  1.0, 1.0}},
+  {"client",   {0.5, -1.0, 1.0}},
+  {"waiting",  {0.0,  0.0, 1.0}},
+};
+
 GoToPoseAction::GoToPoseAction (
   const std::string &name, const BT::NodeConfig &config)
 : BT::StatefulActionNode(name, config)
@@ -65,30 +71,35 @@ GoToPoseAction::onStart()
   NavigateToPose::Goal goal_msg;
   goal_msg.pose.header.frame_id = "map";
   goal_msg.pose.header.stamp = node_->get_clock()->now();
+  
+  double goal_x = there->second[0];
+  double goal_y = there->second[1];
+  double goal_w = there->second[2];
 
   if (goal_name == "client") {
     geometry_msgs::msg::PoseStamped dynamic_pose;
     if (getInput("client_pose", dynamic_pose)) {
       goal_msg.pose.pose = dynamic_pose.pose;
-      RCLCPP_INFO(node_->get_logger(), "GoToPoseAction: usando pose dinámica del cliente (%.2f, %.2f)", dynamic_pose.pose.position.x, dynamic_pose.pose.position.y);
+      goal_x = dynamic_pose.pose.position.x;
+      goal_y = dynamic_pose.pose.position.y;
+      RCLCPP_INFO(node_->get_logger(), "GoToPoseAction: usando pose dinámica del cliente (%.2f, %.2f)", goal_x, goal_y);
     } else {
-      auto &coords = there->second; //x, y, w (cuaterniones)
-      goal_msg.pose.pose.position.x = coords[0];
-      goal_msg.pose.pose.position.y = coords[1];
-      goal_msg.pose.pose.orientation.w = coords[2];
-
+      goal_msg.pose.pose.position.x    = goal_x;
+      goal_msg.pose.pose.position.y    = goal_y;
+      goal_msg.pose.pose.position.z    = 0.0;
+      goal_msg.pose.pose.orientation.w = goal_w;
+      goal_msg.pose.pose.orientation.z = 0.0;
       RCLCPP_WARN(node_->get_logger(), "GoToPoseAction: sin pose dinámica, usando coordenada estática del cliente");
     }
   } else {
-    auto &coords = there->second; //x, y, w (cuaterniones)
-    goal_msg.pose.pose.position.x = coords[0];
-    goal_msg.pose.pose.position.y = coords[1];
-    goal_msg.pose.pose.orientation.w = coords[2];
+    goal_msg.pose.pose.position.x    = goal_x;
+    goal_msg.pose.pose.position.y    = goal_y;
+    goal_msg.pose.pose.position.z    = 0.0;
+    goal_msg.pose.pose.orientation.w = goal_w;
+    goal_msg.pose.pose.orientation.z = 0.0;
   }
 
-  goal_msg.pose.pose.orientation.z = 0.0;
-
-  RCLCPP_INFO(node_->get_logger(), "GoToPoseAction: navigating to '%s' (%.2f, %.2f)", goal_name.c_str(), coords[0], coords[1]);
+  RCLCPP_INFO(node_->get_logger(), "GoToPoseAction: navigating to '%s' (%.2f, %.2f)", goal_name.c_str(), goal_x, goal_y);
 
   goal_handle_future_ = nav_client_->async_send_goal(goal_msg);
   goal_sent_ = true;

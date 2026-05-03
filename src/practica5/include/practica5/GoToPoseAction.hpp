@@ -56,13 +56,6 @@ private:
   std::shared_future<GoalHandleNav::SharedPtr> goal_handle_future_;
   GoalHandleNav::SharedPtr goal_handle_;
   bool goal_sent_{false};
-
-  //sustituir con las coordenadas reales de los lugares
-  std::map<std::string, std::array<double, 3>> waypoints_ = {
-    {"kitchen", {-8.4, -3.6, 4.3}},
-    {"client", {0.0, 0.0, 1.0}}, //debería coger las coordenadas a partir de la detección con el láser
-    {"home", {-5.4, 0.0, 1.0}}
-  };
 };
 
 } // namespace practica5

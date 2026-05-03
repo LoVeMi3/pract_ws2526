@@ -14,16 +14,19 @@ GetClientPoseAction::GetClientPoseAction(const std::string & name, const BT::Nod
   if (!config.blackboard->get("node", node_)) {
     throw BT::RuntimeError("GetClientPoseAction: missing 'node' in blackboard");
   }
-}
-
-BT::NodeStatus GetClientPoseAction::tick()
-{
-  // Suscripción one-shot: esperamos hasta 3 s a recibir la pose
-  auto sub = node_->create_subscription<geometry_msgs::msg::PoseStamped>("/person_pose", 10, [this](const geometry_msgs::msg::PoseStamped::SharedPtr msg) {
+  
+  sub = node_->create_subscription<geometry_msgs::msg::PoseStamped>(
+  "/person_pose", 10, [this](const geometry_msgs::msg::PoseStamped::SharedPtr msg) {
     last_pose_ = *msg;
     pose_received_ = true;
     });
+}
 
+BT::NodeStatus 
+GetClientPoseAction::tick()
+{
+  pose_received_ = false;
+  
   rclcpp::Rate rate(20);
   auto deadline = node_->get_clock()->now() + rclcpp::Duration::from_seconds(3.0);
 
@@ -34,7 +37,7 @@ BT::NodeStatus GetClientPoseAction::tick()
   }
 
   if (!pose_received_) {
-    RCLCPP_WARN(node_->get_logger(), "GetClientPoseAction: no pose received");
+    RCLCPP_WARN(node_->get_logger(), "GetClientPoseAction: no pose received within timeout");
     return BT::NodeStatus::FAILURE;
   }
 
@@ -43,7 +46,6 @@ BT::NodeStatus GetClientPoseAction::tick()
     "GetClientPoseAction: client pose saved (%.2f, %.2f)",
     last_pose_.pose.position.x, last_pose_.pose.position.y);
 
-  pose_received_ = false; // reset para la siguiente vez
   return BT::NodeStatus::SUCCESS;
 }
 

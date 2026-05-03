@@ -10,6 +10,7 @@ int main(int argc, char * argv[])
   rclcpp::init(argc, argv);
 
   auto waiter_bt = std::make_shared<practica5::WaiterBT>();
+  waiter_bt->init();
 
   rclcpp::Rate rate(10); //10hz
 

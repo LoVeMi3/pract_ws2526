@@ -42,11 +42,16 @@ WaiterBT::WaiterBT()
 : Node("waiter_bt")
 {
   blackboard_ = BT::Blackboard::create();
-  blackboard_->set("node", std::shared_ptr<rclcpp::Node>(this, [](auto *) {}));
+}
 
+void
+WaiterBT::init()
+{
+  blackboard_->set("node", shared_from_this());
+ 
   hri_client_ = std::make_shared<HRIClient::HRIClient>(shared_from_this());
   blackboard_->set("hri_client", hri_client_);
-
+ 
   register_nodes();
   create_tree();
 }
