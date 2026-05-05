@@ -49,7 +49,7 @@ WaiterBT::init()
 {
   blackboard_->set("node", shared_from_this());
  
-  hri_client_ = std::make_shared<HRIClient::HRIClient>(shared_from_this());
+  hri_client_ = std::make_shared<HRIClient>(this);
   blackboard_->set("hri_client", hri_client_);
  
   register_nodes();

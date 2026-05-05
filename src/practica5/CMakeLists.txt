@@ -20,18 +20,20 @@ find_package(tf2_geometry_msgs REQUIRED)
 find_package(behaviortree_cpp REQUIRED)
 find_package(hri_client REQUIRED) #hri_nodes
 
+add_library(${PROJECT_NAME} SHARED
+  src/practica5/DetectionNode.cpp
+  src/practica5/WaiterBT.cpp
+  src/practica5/GoToPoseAction.cpp
+  src/practica5/GetClientPoseAction.cpp
+)
+
+get_filename_component(WS_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../../.." ABSOLUTE)
+
 find_library(BT_NODES_LIB bt_nodes
   PATHS "${WS_ROOT}/install/bt_examples/lib"
   NO_DEFAULT_PATH REQUIRED
 )
 
-add_library(${PROJECT_NAME} SHARED
-  src/practica5/DetectionNode.cpp
-  src/practica5/WaiterBT.cpp
-  src/practica5/GoToPoseAction.cpp
-)
-
-get_filename_component(WS_ROOT "${CMAKE_CURRENT_SOURCE_DIR}/../../../.." ABSOLUTE)
 set(BT_EXAMPLES_INCLUDE "${WS_ROOT}/src/ASR-Software/ch6_examples/bt_examples/include")
 
 target_include_directories(${PROJECT_NAME} PUBLIC

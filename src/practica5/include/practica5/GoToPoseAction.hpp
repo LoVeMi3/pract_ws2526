@@ -10,6 +10,7 @@
 #include <random>
 #include <string>
 #include <map>
+#include <array>
 
 #include "behaviortree_cpp/bt_factory.h"
 #include "behaviortree_cpp/behavior_tree.h"
@@ -53,6 +54,7 @@ private:
   rclcpp::Node::SharedPtr node_;
   rclcpp_action::Client<NavigateToPose>::SharedPtr nav_client_;
 
+  static const std::map<std::string, std::array<double, 3>> waypoints_;
   std::shared_future<GoalHandleNav::SharedPtr> goal_handle_future_;
   GoalHandleNav::SharedPtr goal_handle_;
   bool goal_sent_{false};

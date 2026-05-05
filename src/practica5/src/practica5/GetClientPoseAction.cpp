@@ -15,7 +15,7 @@ GetClientPoseAction::GetClientPoseAction(const std::string & name, const BT::Nod
     throw BT::RuntimeError("GetClientPoseAction: missing 'node' in blackboard");
   }
   
-  sub = node_->create_subscription<geometry_msgs::msg::PoseStamped>(
+  sub_ = node_->create_subscription<geometry_msgs::msg::PoseStamped>(
   "/person_pose", 10, [this](const geometry_msgs::msg::PoseStamped::SharedPtr msg) {
     last_pose_ = *msg;
     pose_received_ = true;

@@ -22,6 +22,7 @@ public:
 
 private:
   rclcpp::Node::SharedPtr node_;
+  rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr sub_;
   geometry_msgs::msg::PoseStamped last_pose_;
   bool pose_received_{false};
 };
